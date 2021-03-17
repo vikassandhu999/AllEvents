@@ -1,6 +1,6 @@
-## AskingBadForum ( Clean Code Architecture and Tests )
+### AllEvent
 
-##### A Public web forum created with Node.js, Typescript and MongoDB. Clean Code practices and testable code
+##### AllEvents is a web platform to book organize, search for and book event. Online tickets and payments for bookings.
 
 ### Table of contents
 * [Features](#features)
@@ -8,12 +8,14 @@
 * [Author](#author)
 
 ## Features
-* User Signup & Login
-* User Email Verification
-* Users can create own forum threads, reply to others', list daily interactions etc.
+* User Signup, Signin, Email verification, password forget
+* Organize events, book events.
+* Search for events near to you, based on date & time, language, performers etc.
+* Online ticket generation and payments. 
  
 ## Technologies
 * Node.js
+* React.js
 * MongoDB
 * Express
 * Typescript
