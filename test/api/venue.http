@@ -1,0 +1,19 @@
+###
+POST http://localhost:5000/v1/venue/get-with-distance
+Content-Type: application/json
+
+{
+  "lat" :  -73.9977997 ,
+  "lng" : 40.6118897,
+  "maxDistance": 1
+}
+###
+POST http://localhost:5000/v1/venue
+Content-Type: application/json
+
+{
+  "lng" : 40.6118897,
+ "lat" :  -73.9977997,
+ "media" : ["https://miro.medium.com/max/1304/1*i6TZ_7vZqsVN6jRnjCw8bA.jpeg"],
+ "venueName" : "The Great Vikas Sandhu Plaza"
+}
