@@ -8,8 +8,8 @@ export const Home = () => {
     return (
       <ContainerCenter>
           {/*<EventSearch/>*/}
-          {/*<Event/>*/}
-          <CreateEvent/>
+          <Event/>
+          {/*<CreateEvent/>*/}
       </ContainerCenter>
     );
 }

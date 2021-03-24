@@ -57,8 +57,10 @@ userRouter.post("/User/login",
     async (req, res, next) => {
         try {
             const response = await loginUserUseCase.run(req.body, {});
+
             res.cookie("access-token", response.accessToken);
             res.cookie("refresh-token", response.refreshToken);
+
             res.status(200).json({status: "success"});
         } catch (e) {
             next(e);

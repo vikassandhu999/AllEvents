@@ -1,4 +1,8 @@
 import {v4 as uuid} from "uuid";
+import {Money} from "../../XShared/domain/Money";
+import {AgeGroup} from "./AgeGroup";
+import {Performer} from "./Performer";
+import {Venue} from "../../Venue/domain/Venue";
 
 export type EventDTO = {
     eventId: string;
@@ -8,15 +12,14 @@ export type EventDTO = {
     eventDate: string;
     eventTime: string;
     eventType: string;
-    duration: string;
+    duration: number;
     eventPoster: string;
-    ageGroup: string;
-    ticketPrice: number;
-    ticketPriceCurrency: string;
-    venue : string;
-    numberOfTickets:string;
-    numberOfBookedTickets:string;
-    performer:string;
+    ageGroup: AgeGroup;
+    ticketPrice: Money;
+    venue: Venue;
+    numberOfTickets: number;
+    numberOfBookedTickets: number;
+    performer: Performer;
     isCancelled: boolean;
     createdAt: Date;
 }
@@ -29,100 +32,96 @@ interface EventProps {
     eventDate: string;
     eventTime: string;
     eventType: string;
-    duration: string;
+    duration: number;
     eventPoster: string;
-    ageGroup: string;
-    ticketPrice: number;
+    ageGroup: AgeGroup;
+    ticketPrice: Money;
     ticketPriceCurrency: string;
-    venue: string;
-    numberOfTickets:string;
-    numberOfBookedTickets:string;
-    performer:string;
+    venue: Venue;
+    numberOfTickets: number;
+    numberOfBookedTickets: number;
+    performer: Performer;
     isCancelled?: boolean;
     createdAt?: Date;
 }
 
 export class Event {
-    state : EventDTO;
+    state: EventDTO;
 
     constructor(props: EventProps) {
         this.state = {
             ...props,
-            eventId : props.eventId??uuid(),
-            isCancelled: props.isCancelled??false,
-            createdAt: props.createdAt?? new Date()
+            eventId: props.eventId ?? uuid(),
+            isCancelled: props.isCancelled ?? false,
+            createdAt: props.createdAt ?? new Date()
         }
     }
 
-    get eventId():string {
+    get eventId(): string {
         return this.state.eventId;
     }
 
-    get organizerId():string {
+    get organizerId(): string {
         return this.state.organizerId;
     }
 
-    get eventName():string {
+    get eventName(): string {
         return this.state.eventName;
     }
 
-    get eventDescription():string {
+    get eventDescription(): string {
         return this.state.eventDescription;
     }
 
-    get eventDate():string {
+    get eventDate(): string {
         return this.state.eventDate;
     }
 
-    get eventTime():string {
+    get eventTime(): string {
         return this.state.eventTime;
     }
 
-    get eventType():string {
+    get eventType(): string {
         return this.state.eventType;
     }
 
-    get duration():string {
+    get duration(): number {
         return this.state.duration;
     }
 
-    get eventPoster():string {
+    get eventPoster(): string {
         return this.state.eventPoster;
     }
 
-    get ageGroup():string {
+    get ageGroup(): AgeGroup {
         return this.state.ageGroup;
     }
 
-    get ticketPrice():number {
+    get ticketPrice(): Money {
         return this.state.ticketPrice;
     }
 
-    get ticketPriceCurrency():string {
-        return this.state.ticketPriceCurrency;
-    }
-
-    get venue():string {
+    get venue(): Venue {
         return this.state.venue;
     }
 
-    get numberOfTickets():string {
+    get numberOfTickets(): number {
         return this.state.numberOfTickets;
     }
 
-    get numberOfBookedTickets():string {
+    get numberOfBookedTickets(): number {
         return this.state.numberOfBookedTickets;
     }
 
-    get performer():string {
+    get performer(): Performer {
         return this.state.performer;
     }
 
-    get isCancelled():boolean {
+    get isCancelled(): boolean {
         return this.state.isCancelled;
     }
 
-    get createdAt():Date {
+    get createdAt(): Date {
         return this.state.createdAt;
     }
 

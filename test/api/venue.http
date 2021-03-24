@@ -7,6 +7,7 @@ Content-Type: application/json
   "lng" : 40.6118897,
   "maxDistance": 1
 }
+
 ###
 POST http://localhost:5000/v1/venue
 Content-Type: application/json

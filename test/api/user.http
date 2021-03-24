@@ -2,8 +2,8 @@ POST http://localhost:5000/v1/user
 Content-Type: application/json
 
 {
-  "userName" : "kai5555" ,
-  "email" : "kaizen2323t.tdsaf4@gmail.com" ,
+  "userName" : "kai56555" ,
+  "email" : "kaizejasdfkjas@gmail.com" ,
   "fullName" : "Vikas Sandhu",
   "password" : "vistagram@123"
 }

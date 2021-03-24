@@ -19,7 +19,7 @@ class AuthService {
     }
 
     async register(data : any) : Promise<Result<{status : string}>> {
-        return axios.post(this.baseUrl+"/user" , {...data})
+        return axios.post(this.baseUrl+"/user", {...data})
             .then((res) => {
                 return Result.success(res.data);
             }).catch(error => {
