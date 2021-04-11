@@ -1,56 +1,59 @@
 entities:
-  - name: Event
+  - name: User
     has_mapper: true
     fields:
-      - domain_id: "eventId"
-        mapper_id: "event_id"
+      - domain_id: "userId"
+        mapper_id: "user_id"
         type: "string"
         access_modifier: "public"
         optional: false
-      - domain_id: "eventName"
-        mapper_id: "event_name"
+      - domain_id: "firstName"
+        mapper_id: "first_name"
         type: "string"
         access_modifier: "public"
         optional: false
-      - domain_id: "artistName"
-        mapper_id: "artist_name"
+      - domain_id: "lastName"
+        mapper_id: "last_name"
+        type: "string"
+        access_modifier: "public"
+        optional: true
+      - domain_id: "imgAvatar"
+        mapper_id: "img_avatar"
         type: "string"
         access_modifier: "public"
         optional: false
-      - domain_id: "description"
-        mapper_id: "description"
+      - domain_id: "email"
+        mapper_id: "email"
         type: "string"
         access_modifier: "public"
         optional: false
-      - domain_id: "poster"
-        mapper_id: "poster"
+      - domain_id: "password"
+        mapper_id: "password"
         type: "string"
         access_modifier: "public"
         optional: false
-      - domain_id: "ticketPrice"
-        mapper_id: "ticket_price"
-        type: "number"
-        access_modifier: "public"
-        optional: false
-      - domain_id: "maxTickets"
-        mapper_id: "max_tickets"
-        type: "number"
-        access_modifier: "public"
-        optional: false
-      - domain_id: "venue"
-        mapper_id: "venue"
-        type: "Venue"
-        access_modifier: "public"
-        optional: false
-  - name: Venue
-    has_mapper: true
-    fields:
-      - domain_id: "venueId"
-        mapper_id: "venue_id"
+      - domain_id: "about"
+        mapper_id: "about"
         type: "string"
         access_modifier: "public"
+        optional: true
+      - domain_id: "isEmailVerified"
+        mapper_id: "is_email_verified"
+        type: "boolean"
+        access_modifier: "public"
         optional: false
-      - domain_id: "name"
-        mapper_id: "name"
+      - domain_id: "isDeleted"
+        mapper_id: "is_deleted"
+        type: "boolean"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "createdAt"
+        mapper_id: "created_at"
+        type: "Date"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "authSecret"
+        mapper_id: "auth_secret"
         type: "string"
-      
+        access_modifier: "public"
+        optional: true

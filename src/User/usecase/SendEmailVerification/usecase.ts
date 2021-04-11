@@ -1,11 +1,16 @@
-import {Email, IEmailService} from "../../service/IEmailService";
-import {SendVerificationEmailDTO, SendVerificationEmailResponse, UserEmailDoesNotExistError} from "./types";
-import {IUserRepository} from "../../repositories/IUserRepository";
-import emailConfig from "../../../config/emailConfig";
-import {User} from "../../domain/User";
-import {JWT} from "../../../XShared/packages/jwt";
-import { assert } from "../../../XShared/core/Assert";
-import {UseCase} from "../../../XShared/core/Usecase";
+import emailConfig from "config/emailConfig";
+import {
+    SendVerificationEmailDTO,
+    SendVerificationEmailResponse,
+    UserEmailDoesNotExistError
+} from "User/usecase/SendEmailVerification/types";
+import {Email, IEmailService} from "User/service/IEmailService";
+import User from "User/domain/User";
+import {JWT} from "XShared/packages/jwt";
+import {UseCase} from "XShared/core/Usecase";
+import {IUserRepository} from "User/repositories/IUserRepository";
+import {assert} from "XShared/core/Assert";
+
 
 export class SendVerificationEmailUseCase extends UseCase<SendVerificationEmailDTO , SendVerificationEmailResponse>{
     private readonly emailService : IEmailService;

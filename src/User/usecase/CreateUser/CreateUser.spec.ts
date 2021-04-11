@@ -1,14 +1,15 @@
 import dotenv from "dotenv";
-import {mongooseConnection} from "../../../XShared/infra/db/mongoose/connection";
 import {createUserUseCase} from "./index";
 import {CreateUserResponse, EmailAlreadyExistError} from "./types";
-import {userRepository} from "../../repositories";
+import {mongooseConnection} from "XShared/infra/db/mongoose/connection";
+import {userRepository} from "User/repositories";
 dotenv.config();
 
 const fakeUserDTO = {
-    fullName: "Vikas Sandhu",
+    firstName: "Vikas",
+    lastName:"Sandhu",
     imgAvatar : "https://miro.medium.com/fit/c/262/262/2*jqzCm0lwcJV7QGadqxS3hg.jpeg",
-    email: "kai10@gmail.com",
+    email: "kai100@gmail.com",
     password: "chistagram"
 };
 

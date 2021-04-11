@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {FC, useState} from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
             minHeight:theme.spacing(6),
             border : "solid 1px",
             borderColor:"#bdbbbb",
-            height:"100%"
         },
         onFocusBorder : {
             border : "solid 1px #111"
@@ -40,7 +39,11 @@ const useStyles = makeStyles((theme: Theme) =>
     }));
 
 
-const HeaderSearchBar = () => {
+interface SearchBarProps {
+    onFocus?:Function
+}
+
+const HeaderSearchBar : FC<SearchBarProps> = ({onFocus}) => {
     const classes = useStyles();
     const [isFocused,setFocused] = useState<boolean>(false);
 
@@ -50,8 +53,11 @@ const HeaderSearchBar = () => {
                 <SearchIcon htmlColor={"#a9a8b3"}/>
             </div>
             <InputBase
-                onFocus={()=>setFocused(true)}
-                onBlur={()=>setFocused(false)}
+                onFocus={()=>{
+                    setFocused(true);
+                    if(onFocus) onFocus();
+                }}
+                onBlur={()=>{setFocused(false)}}
                 placeholder="Search…"
                 classes={{
                     root : classes.input

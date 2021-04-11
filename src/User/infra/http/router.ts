@@ -1,13 +1,29 @@
 import express, {Request} from "express";
-import {createUserUseCase} from "../../usecase/CreateUser";
-import {sendEmailVerificationUseCase} from "../../usecase/SendEmailVerification";
-import {loginUserUseCase} from "../../usecase/LoginUser";
-import {verifyUserEmailUseCase} from "../../usecase/VerifyUserEmail";
-import {authMiddleware} from "./middlewares";
-import {getUserProfileUseCase} from "../../usecase/GetUserProfile";
-import {UserContext} from "../../domain/UserContext";
+import {sendEmailVerificationUseCase} from "User/usecase/SendEmailVerification";
+import {getUserProfileUseCase} from "User/usecase/GetUserProfile";
+import {createUserUseCase} from "User/usecase/CreateUser";
+import {UserContext} from "User/domain/UserContext";
+import {authMiddleware} from "User/infra/http/middlewares";
+import {verifyUserEmailUseCase} from "User/usecase/VerifyUserEmail";
+import {loginUserUseCase} from "User/usecase/LoginUser";
+import authEmailStatusUseCase from "User/usecase/AuthEmailStatus";
+
 
 const userRouter = express.Router();
+
+//this one is an experimental route
+//we are working on different auth style for better UX
+userRouter.post("/User/email",
+    async (req, res, next) => {
+    try {
+        const response = await authEmailStatusUseCase.run(req.body, {});
+        res.status(200).json(response);
+    } catch (e) {
+        next(e);
+    }
+});
+
+
 
 userRouter.post("/User",
     async (req, res, next) => {

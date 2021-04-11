@@ -1,5 +1,5 @@
-import {MongooseUserRepository} from "./imples/MongooseUserRepository";
-import { IUserRepository } from './IUserRepository';
+import {MongooseUserRepository} from "User/repositories/imples/MongooseUserRepository";
+
 
 const userRepository = new MongooseUserRepository();
 

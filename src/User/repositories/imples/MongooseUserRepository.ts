@@ -1,7 +1,7 @@
 import {IUserRepository} from "../IUserRepository";
-import {UserModel} from "../../infra/database/mongoose/models/UserModel";
-import {User} from "../../domain/User";
-import {UserMapper} from "../../mapper/UserMapper";
+import {UserModel} from "User/infra/database/mongoose/models/UserModel";
+import User from "User/domain/User";
+import UserMapper from "User/mapper/UserMapper";
 
 export class MongooseUserRepository implements IUserRepository{
     private readonly model = UserModel;

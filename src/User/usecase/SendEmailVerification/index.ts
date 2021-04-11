@@ -1,6 +1,6 @@
 import {SendVerificationEmailUseCase} from "./usecase";
-import {userRepository} from "../../repositories";
-import {emailService} from "../../service";
+import {userRepository} from "User/repositories";
+import {emailService} from "User/service";
 
 const sendEmailVerificationUseCase = new SendVerificationEmailUseCase(userRepository,emailService);
 

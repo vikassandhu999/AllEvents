@@ -1,8 +1,13 @@
 import React from "react";
+import Header from "x-shared/header";
+import ExploreEventComponent from "explore-events/explore-events-component";
 
 const ExploreEventsPage = () => {
     return (
-        <div>Explore Events</div>
+        <>
+            <Header/>
+            <ExploreEventComponent/>
+        </>
     )
 }
 

@@ -1,6 +1,6 @@
-import {BaseError} from "../../../XShared/core/BaseError";
-import {User} from "../../domain/User";
-import {HttpErrors} from "../../../XShared/infra/http/errorCode";
+import {HttpErrors} from "XShared/infra/http/errorCode";
+import {BaseError} from "XShared/core/BaseError";
+
 
 export type SendVerificationEmailDTO = {
     email : string;

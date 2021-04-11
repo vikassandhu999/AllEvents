@@ -4,14 +4,14 @@ import {
     EmailOrPasswordDidNotMatchError,
     LoginUserDTO,
     LoginUserResponse
-} from "./types";
-import {User} from "../../domain/User";
-import Password from "../../../XShared/packages/Password";
-import {IUserRepository} from "../../repositories/IUserRepository";
-import {JWT} from "../../../XShared/packages/jwt";
-import authConfig from "../../../config/authConfig";
-import { assert } from "../../../XShared/core/Assert";
-import {UseCase} from "../../../XShared/core/Usecase";
+} from "User/usecase/LoginUser/types";
+import User from "User/domain/User";
+import authConfig from "config/authConfig";
+import {JWT} from "XShared/packages/jwt";
+import {UseCase} from "XShared/core/Usecase";
+import {IUserRepository} from "User/repositories/IUserRepository";
+import Password from "XShared/packages/Password";
+import {assert} from "XShared/core/Assert";
 
 type GetLoginTokensResponse = {accessToken : string , refreshToken : string};
 

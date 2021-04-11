@@ -1,10 +1,10 @@
-import { CreateUserDTO, CreateUserResponse, EmailAlreadyExistError } from "./types";
-import { IUserRepository } from "../../repositories/IUserRepository";
-import { User } from "../../domain/User";
-import Password from "../../../XShared/packages/Password";
-import { SendVerificationEmailUseCase } from "../SendEmailVerification/usecase";
-import { assert } from "../../../XShared/core/Assert";
-import {UseCase} from "../../../XShared/core/Usecase";
+import User from "User/domain/User";
+import {SendVerificationEmailUseCase} from "User/usecase/SendEmailVerification/usecase";
+import {CreateUserDTO, CreateUserResponse, EmailAlreadyExistError} from "User/usecase/CreateUser/types";
+import {UseCase} from "XShared/core/Usecase";
+import {IUserRepository} from "User/repositories/IUserRepository";
+import Password from "XShared/packages/Password";
+import {assert} from "XShared/core/Assert";
 
 export class CreateUserUseCase extends UseCase<CreateUserDTO , CreateUserResponse>{
     private readonly userRepository: IUserRepository;
@@ -18,7 +18,7 @@ export class CreateUserUseCase extends UseCase<CreateUserDTO , CreateUserRespons
 
     protected async runImpl(params: CreateUserDTO, context: any): Promise<CreateUserResponse> {
 
-        const { email, password } = params;
+        const { email, password, firstName,lastName,about, imgAvatar } = params;
 
         const emailExists = await this.userRepository.emailExists(email);
 
@@ -27,11 +27,12 @@ export class CreateUserUseCase extends UseCase<CreateUserDTO , CreateUserRespons
         const hashedPassword = await Password.hashPassword(password);
 
         const user: User = new User({
-            ...params,
-            password: hashedPassword,
-            authSecret: undefined,
-            isEmailVerified: false,
-            isDeleted: false
+            email,
+            password:hashedPassword,
+            firstName,
+            lastName,
+            about,
+            imgAvatar
         });
 
         await this.userRepository.save(user);
@@ -51,11 +52,16 @@ export class CreateUserUseCase extends UseCase<CreateUserDTO , CreateUserRespons
             email: true
         },
         imgAvatar : {
-          presence:true,
           url : true
         },
-        fullName: {
+        firstName: {
             presence: true,
+            length: {
+                minimum: 3,
+                maximum: 30
+            }
+        },
+        lastName: {
             length: {
                 minimum: 3,
                 maximum: 30
@@ -66,6 +72,12 @@ export class CreateUserUseCase extends UseCase<CreateUserDTO , CreateUserRespons
             length: {
                 minimum: 6,
                 maximum: 30
+            }
+        },
+        about: {
+            length: {
+                minimum: 6,
+                maximum: 300
             }
         }
     }

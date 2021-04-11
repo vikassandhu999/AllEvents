@@ -1,35 +1,36 @@
-import {User} from "../domain/User";
+import User from "User/domain/User";
 
-export class UserMapper {
-    public static toDomain(userModel: any): User {
+export default class UserMapper {
+    public static toDomain(model: any) {
         return new User({
-            userId: userModel.user_id,
-            fullName: userModel.full_name,
-            email: userModel.email,
-            password: userModel.password,
-            imgAvatar : userModel.img_avatar,
-            isPerformer : userModel.is_performer,
-            performerProfile : userModel.performer_profile,
-            isEmailVerified: userModel.is_email_verified,
-            isDeleted: userModel.is_deleted,
-            createdAt: userModel.created_at,
-            authSecret: userModel.auth_secret
-        });
+            userId: model.user_id,
+            firstName: model.first_name,
+            lastName: model.last_name,
+            imgAvatar: model.img_avatar,
+            email: model.email,
+            password: model.password,
+            about: model.about,
+            isEmailVerified: model.is_email_verified,
+            isDeleted: model.is_deleted,
+            createdAt: model.created_at,
+            authSecret: model.auth_secret,
+        })
     }
 
-    public static toPersistence(user: User): any {
+    public static toPersistence(domainModel: User) {
         return {
-            user_id: user.userId,
-            full_name: user.fullName,
-            email: user.email,
-            password: user.password,
-            img_avatar : user.imgAvatar,
-            is_performer : user.isPerformer,
-            performer_profile : user.performerProfile,
-            is_email_verified: user.isEmailVerified,
-            is_deleted: user.isDeleted,
-            created_at: user.createdAt,
-            auth_secret: user.authSecret
+            user_id: domainModel.userId,
+            first_name: domainModel.firstName,
+            last_name: domainModel.lastName,
+            img_avatar: domainModel.imgAvatar,
+            email: domainModel.email,
+            password: domainModel.password,
+            about: domainModel.about,
+            is_email_verified: domainModel.isEmailVerified,
+            is_deleted: domainModel.isDeleted,
+            created_at: domainModel.createdAt,
+            auth_secret: domainModel.authSecret,
         }
     }
+
 }

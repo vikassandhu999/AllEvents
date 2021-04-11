@@ -1,9 +1,14 @@
-import {IUserRepository} from "../../repositories/IUserRepository";
-import {InvalidVerificationTokenError, VerifyUserEmailDTO, VerifyUserEmailResponse} from "./types";
-import {JWT} from "../../../XShared/packages/jwt";
-import emailConfig from "../../../config/emailConfig";
-import { assert } from "../../../XShared/core/Assert";
-import {UseCase} from "../../../XShared/core/Usecase";
+import emailConfig from "config/emailConfig";
+import {JWT} from "XShared/packages/jwt";
+import {
+    InvalidVerificationTokenError,
+    VerifyUserEmailDTO,
+    VerifyUserEmailResponse
+} from "User/usecase/VerifyUserEmail/types";
+import {UseCase} from "XShared/core/Usecase";
+import {IUserRepository} from "User/repositories/IUserRepository";
+import {assert} from "XShared/core/Assert";
+
 
 export class VerifyUserEmailUseCase extends UseCase<VerifyUserEmailDTO, VerifyUserEmailResponse>{
     private readonly userRepository : IUserRepository;

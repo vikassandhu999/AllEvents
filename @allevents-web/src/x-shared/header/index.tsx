@@ -5,8 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import HeaderSearchBar from "x-shared/header/search-bar";
 import HeaderActionButton from "x-shared/header/header-action-button";
 import {Container} from "@material-ui/core";
-import {Link} from "react-router-dom";
-import AllEvents from "@allevents/app";
+import {Link, useHistory, useLocation} from "react-router-dom";
 import AllEventsLogo from "@allevents/components/text-logo";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -83,9 +82,12 @@ const useStyles = makeStyles((theme: Theme) =>
 function Header() {
     const classes = useStyles();
 
+    const history = useHistory();
+    const { pathname } = useLocation();
+
     return (
         <div className={classes.headerRoot}>
-            <AppBar elevation={0} className={classes.appBar}>
+            <AppBar elevation={1} className={classes.appBar}>
                 <Container>
                     <Toolbar>
                         <Link to={"/"}>
@@ -94,10 +96,13 @@ function Header() {
 
                         <div className={classes.grow}/>
 
-                        <div className={classes.search}>
-                            <HeaderSearchBar/>
+                        {
+                            pathname!='/event/explore' && <div className={classes.search}>
+                            <HeaderSearchBar onFocus={()=>{
+                                history.push('/event/explore');
+                            }}/>
                         </div>
-
+                        }
                         <div className={classes.grow}/>
 
                         <div className={classes.headerActions}>

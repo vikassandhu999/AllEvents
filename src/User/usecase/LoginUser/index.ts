@@ -1,5 +1,6 @@
-import {LoginUserUseCase} from "./usecase";
-import {userRepository} from "../../repositories";
+import {LoginUserUseCase} from "User/usecase/LoginUser/usecase";
+import {userRepository} from "User/repositories";
+
 
 const loginUserUseCase = new LoginUserUseCase(userRepository);
 
