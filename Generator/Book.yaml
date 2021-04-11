@@ -1,0 +1,56 @@
+entities:
+  - name: Event
+    has_mapper: true
+    fields:
+      - domain_id: "eventId"
+        mapper_id: "event_id"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "eventName"
+        mapper_id: "event_name"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "artistName"
+        mapper_id: "artist_name"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "description"
+        mapper_id: "description"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "poster"
+        mapper_id: "poster"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "ticketPrice"
+        mapper_id: "ticket_price"
+        type: "number"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "maxTickets"
+        mapper_id: "max_tickets"
+        type: "number"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "venue"
+        mapper_id: "venue"
+        type: "Venue"
+        access_modifier: "public"
+        optional: false
+  - name: Venue
+    has_mapper: true
+    fields:
+      - domain_id: "venueId"
+        mapper_id: "venue_id"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "name"
+        mapper_id: "name"
+        type: "string"
+      

@@ -73,6 +73,6 @@
   "exclude": [
     "./node_modules",
     "./test",
-    "./client"
+    "./@allevents-web"
   ]
 }

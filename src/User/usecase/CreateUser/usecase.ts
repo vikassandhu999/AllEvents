@@ -1,4 +1,4 @@
-import { CreateUserDTO, CreateUserResponse, EmailAlreadyExistError, UsernameAlreadyTakenError } from "./types";
+import { CreateUserDTO, CreateUserResponse, EmailAlreadyExistError } from "./types";
 import { IUserRepository } from "../../repositories/IUserRepository";
 import { User } from "../../domain/User";
 import Password from "../../../XShared/packages/Password";
@@ -18,15 +18,11 @@ export class CreateUserUseCase extends UseCase<CreateUserDTO , CreateUserRespons
 
     protected async runImpl(params: CreateUserDTO, context: any): Promise<CreateUserResponse> {
 
-        const { email, userName, password } = params;
+        const { email, password } = params;
 
         const emailExists = await this.userRepository.emailExists(email);
 
         assert(!emailExists, new EmailAlreadyExistError());
-
-        const usernameExists = await this.userRepository.usernameExists(userName);
-
-        assert(!usernameExists, new UsernameAlreadyTakenError());
 
         const hashedPassword = await Password.hashPassword(password);
 
@@ -50,17 +46,13 @@ export class CreateUserUseCase extends UseCase<CreateUserDTO , CreateUserRespons
     }
 
     protected inputConstraints = {
-        userName: {
-            presence: true,
-            format: {
-                pattern: "[a-z0-9]+",
-                flags: "i",
-                message: "can only contain a-z and 0-9"
-            }
-        },
         email: {
             presence: true,
             email: true
+        },
+        imgAvatar : {
+          presence:true,
+          url : true
         },
         fullName: {
             presence: true,

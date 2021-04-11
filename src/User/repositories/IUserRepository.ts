@@ -2,7 +2,6 @@ import { User } from "../domain/User";
 
 export interface IUserRepository {
     emailExists(email: string): Promise<boolean>
-    usernameExists(username: string): Promise<boolean>
     save(user: User): Promise<void>
     setAuthSecret(userId: string, authSecret: string): Promise<void>
     setIsEmailVerified(userId: string, value: boolean): Promise<void>

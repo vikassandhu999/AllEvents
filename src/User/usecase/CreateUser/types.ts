@@ -2,20 +2,14 @@ import {BaseError} from "../../../XShared/core/BaseError";
 import { HttpErrors } from "../../../XShared/infra/http/errorCode";
 
 export type CreateUserDTO = {
-    userName: string;
     fullName: string;
+    imgAvatar : string;
     email: string;
     password: string;
 }
 
 export class CreateUserResponse {
     status : string = "success";
-}
-
-export class UsernameAlreadyTakenError extends BaseError {
-    constructor() {
-        super("Username already exists" ,HttpErrors.ALREADY_EXISTS ,{userName : "Username already exists"});
-    }
 }
 
 export class EmailAlreadyExistError extends BaseError {

@@ -26,14 +26,12 @@ export class LoginUserUseCase extends UseCase<LoginUserDTO , LoginUserResponse>{
     private async getLoginTokens(user : User) : Promise<GetLoginTokensResponse> {
         const accessToken = JWT.createToken({
             userId : user.userId ,
-            userName : user.userName
         } , authConfig.accessSecret , authConfig.accessTokenExpiryToken);
 
         const authSecret = uuid();
 
         const refreshToken = JWT.createToken({
             userId : user.userId,
-            userName : user.userName,
         } , authSecret , authConfig.refreshExpiryTime);
 
         await this.userRepository.setAuthSecret(user.userId , authSecret);
