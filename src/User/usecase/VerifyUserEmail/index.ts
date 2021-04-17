@@ -4,6 +4,4 @@ import {VerifyUserEmailUseCase} from "User/usecase/VerifyUserEmail/usecase";
 
 const verifyUserEmailUseCase = new VerifyUserEmailUseCase(userRepository);
 
-export {
-    verifyUserEmailUseCase
-}
+export default verifyUserEmailUseCase;

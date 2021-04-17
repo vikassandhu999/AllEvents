@@ -1,8 +1,6 @@
-import {GetUserProfileUseCase} from "./usecase";
-import {userRepository} from "../../repositories";
+import {GetUserProfileUseCase} from "User/usecase/GetUserProfile/usecase";
+import {userRepository} from "User/repositories";
 
 const getUserProfileUseCase = new GetUserProfileUseCase(userRepository);
 
-export {
-    getUserProfileUseCase
-}
+export default getUserProfileUseCase;

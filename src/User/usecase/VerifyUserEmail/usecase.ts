@@ -9,7 +9,6 @@ import {UseCase} from "XShared/core/Usecase";
 import {IUserRepository} from "User/repositories/IUserRepository";
 import {assert} from "XShared/core/Assert";
 
-
 export class VerifyUserEmailUseCase extends UseCase<VerifyUserEmailDTO, VerifyUserEmailResponse>{
     private readonly userRepository : IUserRepository;
 

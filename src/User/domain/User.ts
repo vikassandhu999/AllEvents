@@ -12,7 +12,6 @@ export interface IUser {
     isDeleted : boolean;
     createdAt : Date;
     authSecret ?: string;
-
 }
 
 export interface UserProps {

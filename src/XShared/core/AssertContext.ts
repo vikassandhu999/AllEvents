@@ -5,12 +5,12 @@ export interface AssertContextProps {
     authLevel?: number;
 }
 
-export function AssertContext(context: any, props: AssertContextProps) {
-    if ((!!props.isAuthenticated) && props.isAuthenticated != context.isAuthenticated) {
+export function AssertContext(context: any, assertion: AssertContextProps) {
+    if ((!!assertion.isAuthenticated) && assertion.isAuthenticated != context.isAuthenticated) {
         throw new UnauthorizedAccessError();
     }
 
-    if ((!!props.authLevel) && props.authLevel != context.authLevel) {
+    if ((!!assertion.authLevel) && assertion.authLevel != context.authLevel) {
         throw new UnauthorizedAccessError();
     }
 }

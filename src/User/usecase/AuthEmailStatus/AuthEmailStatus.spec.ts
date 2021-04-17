@@ -1,7 +1,8 @@
 import dotenv from "dotenv";
-import {mongooseConnection} from "XShared/infra/db/mongoose/connection";
 import authEmailStatusUseCase from "User/usecase/AuthEmailStatus/index";
+import {mongooseConnection} from "XShared/infra/db/mongoose/connection";
 import {EMAIL_STATUS} from "User/usecase/AuthEmailStatus/types";
+
 dotenv.config();
 
 const fakeDTO0 = {

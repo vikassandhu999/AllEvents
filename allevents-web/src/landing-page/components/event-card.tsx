@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
         root: {
             cursor: "pointer",
             borderRadius: 0,
+            contentVisibility:"auto",
             '&:hover': {
                 boxShadow: theme.shadows[8]
             }

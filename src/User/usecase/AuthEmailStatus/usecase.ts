@@ -1,7 +1,7 @@
-import {UseCase} from "XShared/core/Usecase";
-import {AuthEmailStatusDTO, AuthEmailStatusResponse, EMAIL_STATUS} from "User/usecase/AuthEmailStatus/types";
-import {IUserRepository} from "User/repositories/IUserRepository";
 import User from "User/domain/User";
+import {AuthEmailStatusDTO, AuthEmailStatusResponse, EMAIL_STATUS} from "User/usecase/AuthEmailStatus/types";
+import {UseCase} from "XShared/core/Usecase";
+import {IUserRepository} from "User/repositories/IUserRepository";
 
 export default class AuthEmailStatusUseCase extends UseCase<AuthEmailStatusDTO, AuthEmailStatusResponse> {
     protected inputConstraints = {

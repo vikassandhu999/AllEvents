@@ -1,6 +1,7 @@
 import {HttpErrors} from "XShared/infra/http/errorCode";
 import {BaseError} from "XShared/core/BaseError";
 
+
 export type VerifyUserEmailDTO = {
     verificationToken : string;
 }

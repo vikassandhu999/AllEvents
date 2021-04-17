@@ -1,4 +1,4 @@
-import {NodeMailerEmailService} from "./imples/NodeMailerEmailService";
+import {NodeMailerEmailService} from "User/service/imples/NodeMailerEmailService";
 
 const emailService = new NodeMailerEmailService();
 

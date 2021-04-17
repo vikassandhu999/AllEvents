@@ -1,6 +1,7 @@
 import nodemailer, {Transporter} from "nodemailer";
-import {Email, IEmailService} from "../IEmailService";
-import emailConfig from "../../../config/emailConfig";
+import emailConfig from "config/emailConfig";
+import {Email, IEmailService} from "User/service/IEmailService";
+
 
 export class NodeMailerEmailService implements IEmailService {
     private readonly transporter : Transporter;

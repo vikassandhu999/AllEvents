@@ -1,6 +1,5 @@
 import User from "User/domain/User";
 
-
 export interface IUserRepository {
     emailExists(email: string): Promise<boolean>
     save(user: User): Promise<void>

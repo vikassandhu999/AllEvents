@@ -1,5 +1,5 @@
-import {BaseError} from "XShared/core/BaseError";
 import {HttpErrors} from "XShared/infra/http/errorCode";
+import {BaseError} from "XShared/core/BaseError";
 
 export type LoginUserDTO = {
     email : string;

@@ -1,31 +1,28 @@
 import express, {Request} from "express";
-import {sendEmailVerificationUseCase} from "User/usecase/SendEmailVerification";
-import {getUserProfileUseCase} from "User/usecase/GetUserProfile";
-import {createUserUseCase} from "User/usecase/CreateUser";
+import authEmailStatusUseCase from "User/usecase/AuthEmailStatus";
+import createUserUseCase from "User/usecase/CreateUser";
+import sendEmailVerificationUseCase from "User/usecase/SendEmailVerification";
+import getUserProfileUseCase from "User/usecase/GetUserProfile";
 import {UserContext} from "User/domain/UserContext";
 import {authMiddleware} from "User/infra/http/middlewares";
-import {verifyUserEmailUseCase} from "User/usecase/VerifyUserEmail";
-import {loginUserUseCase} from "User/usecase/LoginUser";
-import authEmailStatusUseCase from "User/usecase/AuthEmailStatus";
-
+import verifyUserEmailUseCase from "User/usecase/VerifyUserEmail";
+import loginUserUseCase from "User/usecase/LoginUser";
 
 const userRouter = express.Router();
 
 //this one is an experimental route
 //we are working on different auth style for better UX
-userRouter.post("/User/email",
+userRouter.post("/user/email/status",
     async (req, res, next) => {
-    try {
-        const response = await authEmailStatusUseCase.run(req.body, {});
-        res.status(200).json(response);
-    } catch (e) {
-        next(e);
-    }
-});
+        try {
+            const response = await authEmailStatusUseCase.run(req.body, {});
+            res.status(200).json(response);
+        } catch (e) {
+            next(e);
+        }
+    });
 
-
-
-userRouter.post("/User",
+userRouter.post("/user",
     async (req, res, next) => {
         try {
             console.log(req.body);
@@ -36,7 +33,7 @@ userRouter.post("/User",
         }
     });
 
-userRouter.get("/User",
+userRouter.get("/user",
     authMiddleware.getUserContext()
     , async (req: Request, res, next) => {
         try {
@@ -47,7 +44,7 @@ userRouter.get("/User",
         }
     });
 
-userRouter.get("/User/email/:email/verify",
+userRouter.get("/user/email/:email/verify",
     async (req, res, next) => {
         try {
             const email = req.params.email;
@@ -58,7 +55,7 @@ userRouter.get("/User/email/:email/verify",
         }
     });
 
-userRouter.post("/User/email/verify",
+userRouter.post("/user/email/verify",
     async (req, res, next) => {
         try {
             const verificationToken = req.body.verificationToken;
@@ -69,7 +66,7 @@ userRouter.post("/User/email/verify",
         }
     });
 
-userRouter.post("/User/login",
+userRouter.post("/user/login",
     async (req, res, next) => {
         try {
             const response = await loginUserUseCase.run(req.body, {});

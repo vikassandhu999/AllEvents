@@ -13,6 +13,7 @@ import {IUserRepository} from "User/repositories/IUserRepository";
 import Password from "XShared/packages/Password";
 import {assert} from "XShared/core/Assert";
 
+
 type GetLoginTokensResponse = {accessToken : string , refreshToken : string};
 
 export class LoginUserUseCase extends UseCase<LoginUserDTO , LoginUserResponse>{

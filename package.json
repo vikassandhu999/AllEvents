@@ -1,12 +1,12 @@
 {
-  "name": "mamashipper",
+  "name": "allevents",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Vikas",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "start": "ts-node --files src/app.ts",
+    "build": "tsc -p .",
+    "start": "NODE_PATH=./src ts-node --files src/app.ts",
     "generate":"kaigenerator",
     "drop-mongodb": "ts-node src/XShared/infra/db/mongoose/dropDb.ts",
     "dev": "nodemon --config nodemon.json src/app.ts",

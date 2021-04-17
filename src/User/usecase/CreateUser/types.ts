@@ -1,6 +1,6 @@
 import {HttpErrors} from "XShared/infra/http/errorCode";
-import {BaseError} from "XShared/core/BaseError";
 import {IUser} from "User/domain/User";
+import {BaseError} from "XShared/core/BaseError";
 
 export type CreateUserDTO = Pick<IUser,
     "email" |

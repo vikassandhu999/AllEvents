@@ -1,5 +1,5 @@
-import {AuthMiddleware} from "./authMiddleware";
-import {userRepository} from "../../../repositories";
+import {AuthMiddleware} from "User/infra/http/middlewares/authMiddleware";
+import {userRepository} from "User/repositories";
 
 const authMiddleware = new AuthMiddleware(userRepository);
 

@@ -6,7 +6,7 @@ import AllEventsLogo from "@allevents/components/text-logo";
 import {ArrowForward} from "@material-ui/icons";
 import useFormStyles from "auth/form.style";
 
-const LoginForm = () => {
+const SignupForm = () => {
     const classes = useFormStyles();
     return (
         <form className={classes.formCard} noValidate autoComplete="off">
@@ -15,30 +15,41 @@ const LoginForm = () => {
             <Typography
                 className={classes.formTitle}
                 variant="h6">
-                Login
+                Create Account
             </Typography>
             <div className={classes.box}/>
 
             <AETextField
-                size={"medium"}
+                size={"small"}
                 id="outlined-basic"
                 label="Email address"
                 variant="outlined" />
             <AETextField
-                size={"medium"}
+                size={"small"}
                 id="outlined-basic"
-                label="password"
+                label="First name"
                 variant="outlined" />
+            <AETextField
+                size={"small"}
+                id="outlined-basic"
+                label="Last name"
+                variant="outlined"
+            />
+         <AETextField
+             size={"small"}
+             id="outlined-basic"
+             label="password"
+             variant="outlined" />
 
             <div className={classes.box0}/>
             <SubmitButton
                 variant={"contained"}
                 endIcon={<ArrowForward/>}
             >
-                Login
+                Create account
             </SubmitButton>
         </form>
     )
 }
 
-export default LoginForm;
+export default SignupForm;

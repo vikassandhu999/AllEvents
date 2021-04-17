@@ -1,8 +1,9 @@
 import dotenv from "dotenv";
-import {createUserUseCase} from "./index";
 import {CreateUserResponse, EmailAlreadyExistError} from "./types";
+import createUserUseCase from "User/usecase/CreateUser/index";
 import {mongooseConnection} from "XShared/infra/db/mongoose/connection";
 import {userRepository} from "User/repositories";
+
 dotenv.config();
 
 const fakeUserDTO = {

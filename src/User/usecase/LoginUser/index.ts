@@ -4,6 +4,4 @@ import {userRepository} from "User/repositories";
 
 const loginUserUseCase = new LoginUserUseCase(userRepository);
 
-export {
-    loginUserUseCase
-}
+export default loginUserUseCase;

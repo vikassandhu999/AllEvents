@@ -1,5 +1,6 @@
 import sgMail from "@sendgrid/mail";
-import {Email, IEmailService} from "../IEmailService";
+import {Email, IEmailService} from "User/service/IEmailService";
+
 
 const sendGridApiKey = process.env.SENDGRID_API_KEY as string;
 

@@ -1,5 +1,5 @@
-import {BaseError} from "../../../XShared/core/BaseError";
-import {HttpErrors} from "../../../XShared/infra/http/errorCode";
+import {HttpErrors} from "XShared/infra/http/errorCode";
+import {BaseError} from "XShared/core/BaseError";
 
 export class GetUserProfileResponse {
     status : string = "success";

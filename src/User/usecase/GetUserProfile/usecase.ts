@@ -1,10 +1,11 @@
-import {IUserRepository} from "../../repositories/IUserRepository";
-import {UserContext} from "../../domain/UserContext";
-import {GetUserProfileResponse, ProfileNotFoundError} from "./types";
 import _ from "lodash";
-import {AssertContext} from "../../../XShared/core/AssertContext";
-import {assert} from "../../../XShared/core/Assert";
-import {UseCase} from "../../../XShared/core/Usecase";
+import {AssertContext} from "XShared/core/AssertContext";
+import {UserContext} from "User/domain/UserContext";
+import {UseCase} from "XShared/core/Usecase";
+import {GetUserProfileResponse, ProfileNotFoundError} from "User/usecase/GetUserProfile/types";
+import {IUserRepository} from "User/repositories/IUserRepository";
+import {assert} from "XShared/core/Assert";
+
 
 export class GetUserProfileUseCase extends UseCase<{} , GetUserProfileResponse> {
     private readonly userRepository : IUserRepository;
@@ -28,7 +29,7 @@ export class GetUserProfileUseCase extends UseCase<{} , GetUserProfileResponse> 
         // @ts-ignore
         const dtoUser = user.toDTO();
 
-        return new GetUserProfileResponse( _.omit(dtoUser , ["authSecret" , "password" , "isDeleted" , "isEmailVerified"]));
+        return new GetUserProfileResponse( _.omit(dtoUser , ["authSecret" , "password"]));
     }
 
 }

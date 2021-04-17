@@ -1,10 +1,10 @@
-import {IUserRepository} from "../../../repositories/IUserRepository";
 import {NextFunction, Request, Response} from "express";
-import {NotEnoughInformationProvidedError} from "../../../../XShared/core/NotEnoughInformationProvidedError";
-import {JWT} from "../../../../XShared/packages/jwt";
-import authConfig from "../../../../config/authConfig";
-import {UnauthorizedAccessError} from "../../../../XShared/core/UnathorizedAccessError";
-import {BaseError} from "../../../../XShared/core/BaseError";
+import {NotEnoughInformationProvidedError} from "XShared/core/NotEnoughInformationProvidedError";
+import authConfig from "config/authConfig";
+import {JWT} from "XShared/packages/jwt";
+import {UnauthorizedAccessError} from "XShared/core/UnathorizedAccessError";
+import {IUserRepository} from "User/repositories/IUserRepository";
+import {BaseError} from "XShared/core/BaseError";
 
 export class AuthMiddleware {
     private readonly userRepository: IUserRepository;
@@ -26,7 +26,6 @@ export class AuthMiddleware {
                     req.context = {
                         userId: decodedAccessToken.userId,
                         accessLevel: 0,
-                        userName: decodedAccessToken.userName,
                         isAuthenticated: true
                     };
                     return next();
@@ -54,14 +53,12 @@ export class AuthMiddleware {
                     return this.fail(res, new UnauthorizedAccessError());
 
                 const newAccessToken = JWT.createToken({
-                    userId: decodedRefreshToken.userId,
-                    userName: decodedRefreshToken.userName
+                    userId: decodedRefreshToken.userId
                 }, authConfig.accessSecret, authConfig.accessTokenExpiryToken);
 
                 req.context = {
                     userId: decodedRefreshToken.userId,
                     accessLevel: 0,
-                    userName: decodedRefreshToken.userName,
                     isAuthenticated: true
                 };
 

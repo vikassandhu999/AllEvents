@@ -4,6 +4,4 @@ import {emailService} from "User/service";
 
 const sendEmailVerificationUseCase = new SendVerificationEmailUseCase(userRepository,emailService);
 
-export {
-    sendEmailVerificationUseCase
-}
+export default sendEmailVerificationUseCase;

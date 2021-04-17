@@ -87,7 +87,7 @@ function Header() {
 
     return (
         <div className={classes.headerRoot}>
-            <AppBar elevation={1} className={classes.appBar}>
+            <AppBar elevation={0} className={classes.appBar}>
                 <Container>
                     <Toolbar>
                         <Link to={"/"}>
