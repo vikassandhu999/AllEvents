@@ -1,9 +1,9 @@
 import {v4 as uuid} from "uuid";
 require("dotenv").config();
 
-import {mongooseConnection} from "../../../src/XShared/infra/db/mongoose/connection";
-import {User} from "../../../src/User/domain/User";
-import {userRepository} from "../../../src/User/repositories";
+import {mongooseConnection} from "../../../src/@app/infra/db/mongoose/connection";
+import {User} from "../../../src/user/domain/User";
+import {userRepository} from "../../../src/user/repositories";
 
 const userId = uuid();
 
@@ -39,7 +39,7 @@ describe('userRepo', () => {
         let user = await userRepository.getById(userId);
         expect(user).not.toBe(null);
         console.log(user);
-        // User.createdAt = User.createdAt.getMilliseconds();
+        // user.createdAt = user.createdAt.getMilliseconds();
         expect(user).toEqual(fakeUser);
     });
 
@@ -78,7 +78,7 @@ describe('userRepo', () => {
         expect(authSecret).toBe(fakeAuthSecret);
     });
 
-    it('should delete the User by id', async function () {
+    it('should delete the user by id', async function () {
         await userRepository.deleteOne(userId);
         const deletedCustomer = await userRepository.getById(userId);
         expect(deletedCustomer).toBe(null);

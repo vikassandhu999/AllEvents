@@ -1,7 +1,7 @@
 import {v4 as uuid} from "uuid";
-import {JWT} from "../../src/XShared/packages/jwt";
+import {JWT} from "../../src/@app/packages/jwt";
 import {TokenExpiredError} from "jsonwebtoken";
-import {Utils} from "../../src/XShared/core/Utils";
+import {Utils} from "../../src/@app/core/Utils";
 
 const fakeSecret = "sdfjaklsdjfl;kasjdflasjkjdqeoirjfgiowjeiofji";
 

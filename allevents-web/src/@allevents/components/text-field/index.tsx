@@ -1,11 +1,13 @@
-import {withStyles} from "@material-ui/core";
+import {TextFieldProps, withStyles} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
+import React, {FC} from "react";
+import {useController} from "react-hook-form";
 
-const AETextField = withStyles((theme)=>({
+const StyledTextField = withStyles((theme) => ({
     root: {
         marginTop: theme.spacing(2),
-        width:"100%",
-        fontSize:"1rem",
+        width: "100%",
+        fontSize: "1rem",
         '& label': {
             color: '#bdbbbb',
         },
@@ -28,5 +30,34 @@ const AETextField = withStyles((theme)=>({
         },
     },
 }))(TextField);
+
+interface Props {
+    textFieldProps: TextFieldProps;
+    control: any;
+    name: string;
+}
+
+const AETextField: FC<Props> = (
+    {
+        textFieldProps,
+        control,
+        name
+    }) => {
+    const {
+        field: {ref, ...inputProps},
+        // fieldState: {invalid, isTouched, isDirty},
+        // formState: {touchedFields, dirtyFields}
+    } = useController({
+        name,
+        control,
+        rules: {required: true},
+        defaultValue: "",
+    });
+    return <StyledTextField
+        {...textFieldProps}
+        {...inputProps}
+        inputRef={ref}
+    />
+}
 
 export default AETextField;

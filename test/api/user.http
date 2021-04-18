@@ -16,7 +16,7 @@ POST http://localhost:5000/v1/user/email/verify
 Content-Type: application/json
 
 {
-  "verificationToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTE5YTNmNi1mZDBjLTRhZTItYTIxMy1mZWI1MjY2OWNmYjAiLCJpYXQiOjE2MTUyMDM3MTQsImV4cCI6MTYxNTIwNDA3NH0.vnltIarwcJnVZObo8y723QqzzCLI6lwlHgQtfDcCnFo"
+  "verificationToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNTBmMWUzYy1lNDJlLTQyMmUtYjUyNC05MDZiMWM5OTI1ZTIiLCJpYXQiOjE2MTg2ODIzNTksImV4cCI6MTYxODY4MjcxOX0.Vc_VPE_ZQMJdzhzU2YBLkxNFmY0qcg5J_qNxv2_1h-s"
 }
 
 ###

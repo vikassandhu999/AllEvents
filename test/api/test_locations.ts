@@ -1,10 +1,10 @@
-import {Utils} from "../../src/XShared/core/Utils";
+import {Utils} from "../../src/@app/core/Utils";
 
 require("dotenv").config();
-import {createVenueUseCase} from "../../src/Venue/usecase/CreateVenue";
-import {CreateVenueDTO} from "../../src/Venue/usecase/CreateVenue/types";
-import {mongooseConnection} from "../../src/XShared/infra/db/mongoose/connection";
-import {venueRepository} from "../../src/Venue/repositories";
+import {createVenueUseCase} from "../../src/venue/usecase/CreateVenue";
+import {CreateVenueDTO} from "../../src/venue/usecase/CreateVenue/types";
+import {mongooseConnection} from "../../src/@app/infra/db/mongoose/connection";
+import {venueRepository} from "../../src/venue/repositories";
 
 const locations = [
     {location: [-73.961704, 40.662942], venueName: "Wendy'S"},

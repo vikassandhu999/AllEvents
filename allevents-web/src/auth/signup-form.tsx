@@ -5,11 +5,32 @@ import SubmitButton from "@allevents/components/submit-button";
 import AllEventsLogo from "@allevents/components/text-logo";
 import {ArrowForward} from "@material-ui/icons";
 import useFormStyles from "auth/form.style";
+import {useForm} from "react-hook-form";
+import authApi from "auth/http/auth";
+
+interface SignupFormInput {
+    email : string;
+    password : string;
+    firstName : string;
+    lastName : string;
+}
 
 const SignupForm = () => {
+    const { handleSubmit, control, formState } = useForm<SignupFormInput>();
+
+    const signup = async (data : SignupFormInput) => {
+        const response = await authApi.signup(data);
+        if(response.isError) {
+            console.log(response.getError());
+        }
+        console.log(response.getValue());
+    }
     const classes = useFormStyles();
     return (
-        <form className={classes.formCard} noValidate autoComplete="off">
+        <form
+            onSubmit={handleSubmit(signup)}
+            className={classes.formCard}
+            noValidate autoComplete="off">
             <AllEventsLogo/>
             <div className={classes.box0}/>
             <Typography
@@ -20,31 +41,48 @@ const SignupForm = () => {
             <div className={classes.box}/>
 
             <AETextField
-                size={"small"}
-                id="outlined-basic"
-                label="Email address"
-                variant="outlined" />
+                textFieldProps={{
+                size : "small",
+                label:"Email address",
+                variant:"outlined"
+            }}
+                name={"email"}
+                control={control}
+                />
             <AETextField
-                size={"small"}
-                id="outlined-basic"
-                label="First name"
-                variant="outlined" />
-            <AETextField
-                size={"small"}
-                id="outlined-basic"
-                label="Last name"
-                variant="outlined"
+                textFieldProps={{
+                    size : "small",
+                    label:"First name",
+                    variant:"outlined"
+                }}
+                name={"firstName"}
+                control={control}
             />
-         <AETextField
-             size={"small"}
-             id="outlined-basic"
-             label="password"
-             variant="outlined" />
+            <AETextField
+                textFieldProps={{
+                    size : "small",
+                    label:"Last name",
+                    variant:"outlined"
+                }}
+                name={"lastName"}
+                control={control}
+            />
+            <AETextField
+                textFieldProps={{
+                    size : "small",
+                    label:"Password",
+                    variant:"outlined"
+                }}
+                name={"password"}
+                control={control}
+            />
 
             <div className={classes.box0}/>
             <SubmitButton
                 variant={"contained"}
                 endIcon={<ArrowForward/>}
+                type={"submit"}
+                disabled={formState.isSubmitting}
             >
                 Create account
             </SubmitButton>

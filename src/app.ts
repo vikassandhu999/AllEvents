@@ -1,8 +1,8 @@
-import {app} from "./XShared/infra/http";
+import {app} from "@app/infra/http";
 
 require("dotenv").config()
 
-import {mongooseConnection} from "./XShared/infra/db/mongoose/connection";
+import {mongooseConnection} from "@app/infra/db/mongoose/connection";
 
 const mongoUrl = process.env.MONGO_URL_DEV as string;
 const port = process.env.PORT;

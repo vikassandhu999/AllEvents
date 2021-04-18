@@ -1,4 +1,4 @@
-import {UserContext} from "src/User/domain/UserContext";
+import {UserContext} from "src/user/domain/UserContext";
 
 declare module 'express' {
     export interface Request {

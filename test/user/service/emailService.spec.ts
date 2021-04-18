@@ -1,6 +1,6 @@
 require("dotenv").config();
-import {Email} from "../../../src/User/service/IEmailService";
-import {emailService} from "../../../src/User/service";
+import {Email} from "../../../src/user/service/IEmailService";
+import {emailService} from "../../../src/user/service";
 
 const fakeEmail : Email = {
     to : "kaizen.tech404@gmail.com",

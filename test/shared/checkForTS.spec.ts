@@ -1,5 +1,5 @@
-import {UsernameAlreadyTakenError} from "../../src/User/usecase/CreateUser/types";
-import {BaseError} from "../../src/XShared/core/BaseError";
+import {UsernameAlreadyTakenError} from "../../src/user/usecase/CreateUser/types";
+import {BaseError} from "../../src/@app/core/BaseError";
 
 describe("CheckAProperty" , ()=>{
     it("check for instance" , () => {

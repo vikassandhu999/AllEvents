@@ -1,8 +1,8 @@
 import nodemailer from "nodemailer";
-import {NodeMailerEmailService} from "../../../src/User/service/imples/NodeMailerEmailService";
+import {NodeMailerEmailService} from "../../../src/user/service/imples/NodeMailerEmailService";
 
 require("dotenv").config();
-import {Email} from "../../../src/User/service/IEmailService";
+import {Email} from "../../../src/user/service/IEmailService";
 
 const fakeEmail : Email = {
     to : "kaizen.tech404@gmail.com",
@@ -16,7 +16,7 @@ async function test() {
         const user = await nodemailer.createTestAccount();
         console.log(user);
         const emailService = new NodeMailerEmailService();
-        // fakeEmail.from = User.User;
+        // fakeEmail.from = user.user;
         await emailService.sendEmail(fakeEmail);
     } catch (e) {
         console.log(e);
