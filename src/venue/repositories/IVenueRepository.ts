@@ -1,5 +1,5 @@
-import {Venue} from "../domain/Venue";
-import {Location} from "../../@app/domain/Location";
+import {Venue} from "venue/domain/Venue";
+import {Location} from "@app/domain/Location";
 
 export interface IVenueRepository {
     getById(venueId : string): Promise<Venue | null>

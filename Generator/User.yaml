@@ -1,5 +1,5 @@
 entities:
-  - name: user
+  - name: User
     has_mapper: true
     fields:
       - domain_id: "userId"

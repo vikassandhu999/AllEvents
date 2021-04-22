@@ -1,8 +1,8 @@
-import {UseCase} from "../../../@app/core/Usecase";
-import {CreateVenueDTO, CreateVenueResponse} from "./types";
-import {IVenueRepository} from "../../repositories/IVenueRepository";
-import {Venue} from "../../domain/Venue";
-import {Location} from "../../../@app/domain/Location";
+import {CreateVenueDTO, CreateVenueResponse} from "venue/usecase/CreateVenue/types";
+import {Venue} from "venue/domain/Venue";
+import {UseCase} from "@app/core/Usecase";
+import {IVenueRepository} from "venue/repositories/IVenueRepository";
+import {Location} from "@app/domain/Location";
 
 export class CreateVenueUseCase extends UseCase<CreateVenueDTO, CreateVenueResponse> {
     protected inputConstraints = {

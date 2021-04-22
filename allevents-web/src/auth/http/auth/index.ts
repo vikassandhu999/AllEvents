@@ -20,6 +20,8 @@ class AuthApi implements IAuthApi {
             baseURL: baseURL,
             headers: {'Accept': 'application/json'}
         });
+
+        this.httpClient.defaults.withCredentials = true;
         // this.httpClient.interceptors.request.use((config) => {
         //     if (typeof window != 'undefined') {
         //         config.headers.Authorization = localStorage.getItem("token");
@@ -49,6 +51,15 @@ class AuthApi implements IAuthApi {
     }
 
     async signup(props: SignupProps): Promise<Result<any>> {
+        try {
+            const response = await this.httpClient.post("/user", {...props});
+            return Result.success<any>(response.data);
+        } catch (e) {
+            return Result.failed<any>(e.response.data);
+        }
+    }
+
+    async verifyAuth(props: SignupProps): Promise<Result<any>> {
         try {
             const response = await this.httpClient.post("/user", {...props});
             return Result.success<any>(response.data);

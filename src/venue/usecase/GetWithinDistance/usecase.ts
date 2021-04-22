@@ -1,7 +1,7 @@
-import {UseCase} from "../../../@app/core/Usecase";
-import {IVenueRepository} from "../../repositories/IVenueRepository";
-import {Location} from "../../../@app/domain/Location";
-import {GetWithinDistanceDTO, GetWithinDistanceResponse} from "./types";
+import {GetWithinDistanceDTO, GetWithinDistanceResponse} from "venue/usecase/GetWithinDistance/types";
+import {UseCase} from "@app/core/Usecase";
+import {IVenueRepository} from "venue/repositories/IVenueRepository";
+import {Location} from "@app/domain/Location";
 
 export class GetWithinDistanceUseCase extends UseCase<GetWithinDistanceDTO, GetWithinDistanceResponse> {
     protected inputConstraints = {

@@ -7,6 +7,7 @@ import {ArrowForward} from "@material-ui/icons";
 import useFormStyles from "auth/form.style";
 import {useForm} from "react-hook-form";
 import authApi from "auth/http/auth";
+import useAuth from "auth/store/use-auth";
 
 interface LoginFormInput {
     email : string;
@@ -15,14 +16,18 @@ interface LoginFormInput {
 
 const LoginForm = () => {
     const { handleSubmit, control, formState } = useForm<LoginFormInput>();
+    const {isAuthenticated,setAuth} = useAuth();
 
     const login = async (data : LoginFormInput) => {
         const response = await authApi.login(data);
         if(response.isError) {
             console.log(response.getError());
         }
-        console.log(response.getValue());
+        console.log({isAuthenticated});
+        setAuth(true);
+        console.log({isAuthenticated});
     }
+
     const classes = useFormStyles();
     return (
         <form

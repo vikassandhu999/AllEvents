@@ -43,6 +43,7 @@ const AETextField: FC<Props> = (
         control,
         name
     }) => {
+
     const {
         field: {ref, ...inputProps},
         // fieldState: {invalid, isTouched, isDirty},
@@ -53,6 +54,7 @@ const AETextField: FC<Props> = (
         rules: {required: true},
         defaultValue: "",
     });
+
     return <StyledTextField
         {...textFieldProps}
         {...inputProps}

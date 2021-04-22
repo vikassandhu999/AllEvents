@@ -1,0 +1,64 @@
+entities:
+  - name: Event
+    has_mapper: true
+    fields:
+      - domain_id: "eventId"
+        mapper_id: "event_id"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "organizerId"
+        mapper_id: "organizer_id"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "eventName"
+        mapper_id: "event_name"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "poster"
+        mapper_id: "poster"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "venue"
+        mapper_id: "venue"
+        type: "Venue"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "ticketPrice"
+        mapper_id: "ticket_price"
+        type: "Money"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "maxAllowedTickets"
+        mapper_id: "max_allowed_tickets"
+        type: "number"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "description"
+        mapper_id: "description"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "eventTime"
+        mapper_id: "event_time"
+        type: "Date"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "duration"
+        mapper_id: "duration"
+        type: "number"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "createdAt"
+        mapper_id: "created_at"
+        type: "Date"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "category"
+        mapper_id: "category"
+        type: "string"
+        access_modifier: "public"
+        optional: false

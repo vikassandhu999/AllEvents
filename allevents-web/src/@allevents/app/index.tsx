@@ -2,7 +2,7 @@ import React from "react";
 import {BrowserRouter} from "react-router-dom";
 import {Route, Switch} from "react-router";
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import muiTheme from "@allevents/mui-theme";
+import muiTheme from "@allevents/infra/mui-theme";
 import LandingPage from "landing-page";
 import BookEvent from "book-event";
 import ScrollToTop from "@allevents/utils/scrollToTop";

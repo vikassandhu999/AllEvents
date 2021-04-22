@@ -2,7 +2,7 @@ import {IVenueRepository} from "../IVenueRepository";
 import {Venue} from "../../domain/Venue";
 import {VenueModel} from "../../infra/db/mongoose/VenueModel";
 import {VenueMapper} from "../../mapper/VenueMapper";
-import {Location} from "../../../@app/domain/Location";
+import {Location} from "@app/domain/Location";
 
 export class MongooseVenueRepository implements IVenueRepository {
     private readonly model = VenueModel;

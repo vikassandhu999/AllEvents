@@ -1,5 +1,6 @@
-import {Venue} from "../domain/Venue";
-import {Location} from "../../@app/domain/Location";
+
+import {Location} from "@app/domain/Location";
+import {Venue} from "venue/domain/Venue";
 
 export class VenueMapper {
     public static toDomain(venueModel: any): Venue {

@@ -5,12 +5,8 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root : {
-            display: 'none',
             color: "#f05537",
-            fontWeight: 800,
-            [theme.breakpoints.up('sm')]: {
-                display: 'block',
-            },
+            fontWeight: 600
         }
     }));
 

@@ -10,7 +10,7 @@ export type GetAuthStatusProps = {
 }
 
 export type AuthEmailStatusResponse = {
-    emailStatus : EMAIL_STATUS
+    emailStatus : EMAIL_STATUS;
     email : string;
 }
 

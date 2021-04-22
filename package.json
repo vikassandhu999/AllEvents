@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -p .",
-    "start": "NODE_PATH=./src ts-node --files src/app.ts",
+    "start": "NODE_PATH=./bin node src/app.js",
     "generate": "kaigenerator",
     "drop-mongodb": "ts-node src/@app/infra/db/mongoose/dropDb.ts",
     "dev": "nodemon --config nodemon.json src/app.ts",

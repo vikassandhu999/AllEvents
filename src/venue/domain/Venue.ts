@@ -1,5 +1,5 @@
 import {v4 as uuid} from "uuid";
-import {Location} from "../../@app/domain/Location";
+import {Location} from "@app/domain/Location";
 
 export interface IVenue {
     venueId : string;

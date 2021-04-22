@@ -26,7 +26,6 @@ export interface UserProps {
     isDeleted ?: boolean;
     createdAt ?: Date;
     authSecret?: string;
-
 }
 
 export default class User {

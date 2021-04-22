@@ -1,7 +1,8 @@
 import express, {Request} from "express";
-import {authMiddleware} from "../../../user/infra/http/middlewares";
-import {createVenueUseCase} from "../../usecase/CreateVenue";
-import {getVenueWithinDistance} from "../../usecase/GetWithinDistance";
+import {authMiddleware} from "user/infra/http/middlewares";
+import {createVenueUseCase} from "venue/usecase/CreateVenue";
+import {getVenueWithinDistance} from "venue/usecase/GetWithinDistance";
+
 
 const venueRouter = express.Router();
 
