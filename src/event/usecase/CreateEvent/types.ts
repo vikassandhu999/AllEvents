@@ -9,6 +9,7 @@ export type CreateEventDTO = {
     ticketPriceCurrency : string;
     maxAllowedTickets : number;
     description : string;
+    language : string;
     category : string;
     eventTime : Date;
     duration : number;

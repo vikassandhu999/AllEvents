@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Result from "@allevents/core/Result";
 import {AuthEmailStatusResponse, GetAuthStatusProps, LoginProps, SignupProps} from "auth/http/auth/types";
+import axiosErrorWrapper from '@allevents/utils/axiosErrorWrapper';
+import UnitResponse from '../../../@allevents/core/UnitResponse';
 
 const baseURL = "http://localhost:5000/v1";
 
@@ -22,14 +24,6 @@ class AuthApi implements IAuthApi {
         });
 
         this.httpClient.defaults.withCredentials = true;
-        // this.httpClient.interceptors.request.use((config) => {
-        //     if (typeof window != 'undefined') {
-        //         config.headers.Authorization = localStorage.getItem("token");
-        //     }
-        //     return config;
-        // }, (error) => {
-        //     return Promise.reject(error.message);
-        // });
     }
 
     async getAuthStatus(props: GetAuthStatusProps): Promise<Result<AuthEmailStatusResponse>> {
@@ -37,34 +31,36 @@ class AuthApi implements IAuthApi {
             const response = await this.httpClient.post("/user/email/status", {...props});
             return Result.success<AuthEmailStatusResponse>(response.data);
         } catch (e) {
-            return Result.failed<AuthEmailStatusResponse>(e.response.data);
+            return Result.failed<AuthEmailStatusResponse>(axiosErrorWrapper(e));
         }
     }
 
-    async login(props: LoginProps): Promise<Result<any>> {
+
+    async login(props: LoginProps): Promise<Result<UnitResponse>> {
         try {
             const response = await this.httpClient.post("/user/login", {...props});
-            return Result.success<any>(response.data);
+            return Result.success<UnitResponse>(response.data);
         } catch (e) {
-            return Result.failed<any>(e.response.data);
+            return Result.failed<UnitResponse>(axiosErrorWrapper(e));
         }
     }
 
-    async signup(props: SignupProps): Promise<Result<any>> {
+    async signup(props: SignupProps): Promise<Result<UnitResponse>> {
         try {
             const response = await this.httpClient.post("/user", {...props});
-            return Result.success<any>(response.data);
+            return Result.success<UnitResponse>(response.data);
         } catch (e) {
-            return Result.failed<any>(e.response.data);
+            return Result.failed<UnitResponse>(axiosErrorWrapper(e));
         }
     }
 
+    //TODO: create route on api and test
     async verifyAuth(props: SignupProps): Promise<Result<any>> {
         try {
             const response = await this.httpClient.post("/user", {...props});
             return Result.success<any>(response.data);
         } catch (e) {
-            return Result.failed<any>(e.response.data);
+            return Result.failed<any>(axiosErrorWrapper(e));
         }
     }
 

@@ -17,6 +17,11 @@ entities:
         type: "string"
         access_modifier: "public"
         optional: false
+      - domain_id: "language"
+        mapper_id: "language"
+        type: "string"
+        access_modifier: "public"
+        optional: false
       - domain_id: "poster"
         mapper_id: "poster"
         type: "string"

@@ -27,7 +27,7 @@ export class MongooseVenueRepository implements IVenueRepository {
     }
 
     async deleteAll() : Promise<void> {
-        await this.model.deleteMany();
+        return this.model.deleteMany();
     }
 
     private static createLocationQuery(location: Location, maxDistance: number) : any {

@@ -1,11 +1,12 @@
 import {v4 as uuid} from "uuid";
-import {Venue} from "venue/domain/Venue";
-import {Money} from "@app/domain/Money";
+import { Money } from "@app/domain/Money";
+import { Venue } from "venue/domain/Venue";
 
 export interface IEvent {
 	eventId : string;
 	organizerId : string;
 	eventName : string;
+	language : string;
 	poster : string;
 	venue : Venue;
 	ticketPrice : Money;
@@ -22,6 +23,7 @@ interface EventProps {
 	eventId ?: string;
 	organizerId : string;
 	eventName : string;
+	language : string;
 	poster : string;
 	venue : Venue;
 	ticketPrice : Money;
@@ -53,6 +55,9 @@ export default class Event {
 	}
 	set eventName(eventName:string) {
 		this.state.eventName=eventName;
+	}
+	set language(language:string) {
+		this.state.language=language;
 	}
 	set poster(poster:string) {
 		this.state.poster=poster;
@@ -92,6 +97,9 @@ export default class Event {
 	}
 	get eventName(): string {
 		return this.state.eventName;
+	}
+	get language(): string {
+		return this.state.language;
 	}
 	get poster(): string {
 		return this.state.poster;

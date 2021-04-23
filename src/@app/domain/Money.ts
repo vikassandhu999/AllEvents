@@ -11,4 +11,12 @@ export class Money {
             value: props.value
         }
     }
+
+    get currency() : string {
+        return this.state.currency;
+    }
+
+    get value() : string {
+        return this.state.currency;
+    }
 }

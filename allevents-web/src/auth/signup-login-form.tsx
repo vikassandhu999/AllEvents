@@ -15,39 +15,62 @@ interface SignupLoginFormInput {
     email : string;
 }
 
-const SignupLoginForm = () => {
 
-    const { handleSubmit, control, formState, setError, errors } = useForm<SignupLoginFormInput>();
+const useSignupLoginController = () => {
+
+    const { 
+            handleSubmit, 
+            control, 
+            formState,
+            errors, 
+            setError 
+        } = useForm<SignupLoginFormInput>();
+
     const history = useHistory();
 
-    const authStatus = async (data : SignupLoginFormInput) => {
+    const getAuthStatus = async (data : SignupLoginFormInput) => {
             const response = await authApi.getAuthStatus(data);
             if(response.isError) {
-               const responseError = response.getError();
-               if(isInvalidParamError(responseError)) {
-                  setError("email",responseError.errorInfo.email);
-                              return;
-               }
+               console.log(response.getError());
+                return;
                //this might internal server error or network error
                 //TODO : handle this error
             }
             const {email,emailStatus} = response.getValue();
             switch (emailStatus) {
                 case EMAIL_STATUS.DOES_NOT_EXIST:
-                    await history.push("/auth/sign-up");
+                    history.push("/auth/sign-up");
                     break;
                 case EMAIL_STATUS.EXISTS_VERIFIED:
-                    await history.push("/auth/login");
+                     history.push("/auth/login");
                     break;
                 case EMAIL_STATUS.EXISTS_NOT_VERIFIED:
-                    await history.push("/auth/");
+                     history.push("/auth/");
             }
     }
+
+    return {
+         onSubmit : handleSubmit(getAuthStatus), 
+         errors,
+         control,
+         formState
+    }
+}
+
+
+const SignupLoginForm = () => {
+
+    const {
+        onSubmit,
+        errors,
+        control,
+        formState
+    } = useSignupLoginController();
 
     const classes = useFormStyles();
     return (
             <form
-                onSubmit={handleSubmit(authStatus)}
+                onSubmit={onSubmit}
                 className={classes.formCard}
                 noValidate autoComplete="off">
                 <AllEventsLogo/>

@@ -39,5 +39,6 @@ venueSchema.index({ location: '2dsphere' });
 const VenueModel = model("venue" , venueSchema);
 
 export {
-    VenueModel
+    VenueModel,
+    venueSchema
 }
