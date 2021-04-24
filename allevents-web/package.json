@@ -42,11 +42,11 @@
     "@types/snowpack-env": "^2.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
+    "start": "snowpack dev --reload",
+    "build": "snowpack build",
+    "test": "npx jest",
+    "test-watch": "npx jest --watch",
+    "test-coverage": "npx jest --coverage",
   },
   "browserslist": {
     "production": [
