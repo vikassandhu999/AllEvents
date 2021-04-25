@@ -1,37 +1,46 @@
-import emailConfig from "config/emailConfig";
-import {JWT} from "@app/packages/jwt";
+import emailConfig from 'config/emailConfig';
+import { JWT } from '@app/packages/jwt';
 import {
-    InvalidVerificationTokenError,
-    VerifyUserEmailDTO,
-    VerifyUserEmailResponse
-} from "user/usecase/VerifyUserEmail/types";
-import {UseCase} from "@app/core/Usecase";
-import {IUserRepository} from "user/repositories/IUserRepository";
-import {assert} from "@app/core/Assert";
+  InvalidVerificationTokenError,
+  VerifyUserEmailDTO,
+  VerifyUserEmailResponse,
+} from 'user/usecase/VerifyUserEmail/types';
+import { UseCase } from '@app/core/Usecase';
+import { IUserRepository } from 'user/repositories/IUserRepository';
+import { assert } from '@app/core/Assert';
 
-export class VerifyUserEmailUseCase extends UseCase<VerifyUserEmailDTO, VerifyUserEmailResponse>{
-    private readonly userRepository : IUserRepository;
+export class VerifyUserEmailUseCase extends UseCase<
+  VerifyUserEmailDTO,
+  VerifyUserEmailResponse
+> {
+  private readonly userRepository: IUserRepository;
 
-    constructor(userRepository : IUserRepository) {
-        super();
-        this.userRepository = userRepository;
-    }
+  constructor(userRepository: IUserRepository) {
+    super();
+    this.userRepository = userRepository;
+  }
 
-    protected async runImpl(params: VerifyUserEmailDTO , context: any): Promise<VerifyUserEmailResponse> {
-        const { verificationToken } = params;
+  protected async runImpl(
+    params: VerifyUserEmailDTO,
+    context: any,
+  ): Promise<VerifyUserEmailResponse> {
+    const { verificationToken } = params;
 
-        const decoded = await JWT.verify(verificationToken , emailConfig.emailVerificationTokenSecret);
+    const decoded = await JWT.verify(
+      verificationToken,
+      emailConfig.emailVerificationTokenSecret,
+    );
 
-        assert(!!decoded , new InvalidVerificationTokenError());
+    assert(!!decoded, new InvalidVerificationTokenError());
 
-        await this.userRepository.setIsEmailVerified(decoded.userId , true);
+    await this.userRepository.setIsEmailVerified(decoded.userId, true);
 
-        return new VerifyUserEmailResponse();
-    }
+    return new VerifyUserEmailResponse();
+  }
 
-    protected inputConstraints = {
-        verificationToken: {
-            presence: true
-        }
-    }
+  protected inputConstraints = {
+    verificationToken: {
+      presence: true,
+    },
+  };
 }

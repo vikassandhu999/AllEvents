@@ -1,15 +1,15 @@
-import {Venue} from "../../domain/Venue";
+import { Venue } from '../../domain/Venue';
 
 export type GetWithinDistanceDTO = {
-    maxDistance : number;
-    lat : number;
-    lng: number;
-}
+  maxDistance: number;
+  lat: number;
+  lng: number;
+};
 
-export  class GetWithinDistanceResponse {
-    status : string = "success";
-    data : Array<Venue>;
-    constructor(data : Array<Venue>) {
-        this.data = data;
-    }
+export class GetWithinDistanceResponse {
+  status: string = 'success';
+  data: Array<Venue>;
+  constructor(data: Array<Venue>) {
+    this.data = data;
+  }
 }

@@ -1,5 +1,5 @@
-import AuthEmailStatusUseCase from "user/usecase/AuthEmailStatus/usecase";
-import {userRepository} from "user/repositories";
+import AuthEmailStatusUseCase from 'user/usecase/AuthEmailStatus/usecase';
+import { userRepository } from 'user/repositories';
 
 const authEmailStatusUseCase = new AuthEmailStatusUseCase(userRepository);
 

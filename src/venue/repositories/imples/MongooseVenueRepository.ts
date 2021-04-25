@@ -1,48 +1,56 @@
-import {IVenueRepository} from "../IVenueRepository";
-import {Venue} from "../../domain/Venue";
-import {VenueModel} from "../../infra/db/mongoose/VenueModel";
-import {VenueMapper} from "../../mapper/VenueMapper";
-import {Location} from "@app/domain/Location";
+import { IVenueRepository } from '../IVenueRepository';
+import { Venue } from '../../domain/Venue';
+import { VenueModel } from '../../infra/db/mongoose/VenueModel';
+import { VenueMapper } from '../../mapper/VenueMapper';
+import { Location } from '@app/domain/Location';
 
 export class MongooseVenueRepository implements IVenueRepository {
-    private readonly model = VenueModel;
+  private readonly model = VenueModel;
 
-    async getById(venueId: string): Promise<Venue | null> {
-        const venueDoc = await this.model.findOne({venue_id : venueId}).exec();
-        if(!venueDoc) return null;
-        return VenueMapper.toDomain(venueDoc);
-    }
+  async getById(venueId: string): Promise<Venue | null> {
+    const venueDoc = await this.model.findOne({ venue_id: venueId }).exec();
+    if (!venueDoc) return null;
+    return VenueMapper.toDomain(venueDoc);
+  }
 
-    async getWithDistance(location: Location, maxDistance: number): Promise<Array<Venue>> {
-        const query = MongooseVenueRepository.createLocationQuery(location,maxDistance);
-        const result = await this.model.find(query).exec();
-        if(!result) return [];
-        return result.map((venueDoc)=> VenueMapper.toDomain(venueDoc));
-    }
+  async getWithDistance(
+    location: Location,
+    maxDistance: number,
+  ): Promise<Array<Venue>> {
+    const query = MongooseVenueRepository.createLocationQuery(
+      location,
+      maxDistance,
+    );
+    const result = await this.model.find(query).exec();
+    if (!result) return [];
+    return result.map((venueDoc) => VenueMapper.toDomain(venueDoc));
+  }
 
-    async save(venue: Venue): Promise<void> {
-        const venueDoc = VenueMapper.toPersistence(venue);
-        const newVenue = new this.model(venueDoc);
-        await newVenue.save();
-    }
+  async save(venue: Venue): Promise<void> {
+    const venueDoc = VenueMapper.toPersistence(venue);
+    const newVenue = new this.model(venueDoc);
+    await newVenue.save();
+  }
 
-    async deleteAll() : Promise<void> {
-        return this.model.deleteMany();
-    }
+  async deleteAll(): Promise<void> {
+    return this.model.deleteMany();
+  }
 
-    private static createLocationQuery(location: Location, maxDistance: number) : any {
-        const METERS_PER_MILE = 1609.34;
-        return {
-            location: {
-                $near: {
-                    $maxDistance: maxDistance * METERS_PER_MILE,
-                    $geometry: {
-                        type: "Point",
-                        coordinates: [location.lat,location.lng]
-                    }
-                }
-            }
-        }
-    }
-
+  private static createLocationQuery(
+    location: Location,
+    maxDistance: number,
+  ): any {
+    const METERS_PER_MILE = 1609.34;
+    return {
+      location: {
+        $near: {
+          $maxDistance: maxDistance * METERS_PER_MILE,
+          $geometry: {
+            type: 'Point',
+            coordinates: [location.lat, location.lng],
+          },
+        },
+      },
+    };
+  }
 }

@@ -1,6 +1,5 @@
-import {AuthType} from "./types";
+import { AuthType } from './types';
 
 class AuthPackage {
-    public static make<K, V>(authType: AuthType) {
-    }
+  public static make<K, V>(authType: AuthType) {}
 }

@@ -1,3 +1,1 @@
-export class OAuthGoogle {
-
-}
+export class OAuthGoogle {}

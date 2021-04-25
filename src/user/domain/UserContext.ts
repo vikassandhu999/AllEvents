@@ -1,5 +1,5 @@
 export type UserContext = {
-    userId : string;
-    isAuthenticated : boolean;
-    accessLevel : number;
-}
+  userId: string;
+  isAuthenticated: boolean;
+  accessLevel: number;
+};

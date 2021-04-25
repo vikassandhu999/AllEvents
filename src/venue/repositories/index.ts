@@ -1,7 +1,5 @@
-import {MongooseVenueRepository} from "./imples/MongooseVenueRepository";
+import { MongooseVenueRepository } from './imples/MongooseVenueRepository';
 
 const venueRepository = new MongooseVenueRepository();
 
-export {
-    venueRepository
-}
+export { venueRepository };

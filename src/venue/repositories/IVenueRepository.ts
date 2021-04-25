@@ -1,9 +1,12 @@
-import {Venue} from "venue/domain/Venue";
-import {Location} from "@app/domain/Location";
+import { Venue } from 'venue/domain/Venue';
+import { Location } from '@app/domain/Location';
 
 export interface IVenueRepository {
-    getById(venueId : string): Promise<Venue | null>
-    getWithDistance(location: Location, maxDistance: number): Promise<Array<Venue>>
-    save(venue:Venue): Promise<void>
-    deleteAll(): Promise<void>
+  getById(venueId: string): Promise<Venue | null>;
+  getWithDistance(
+    location: Location,
+    maxDistance: number,
+  ): Promise<Array<Venue>>;
+  save(venue: Venue): Promise<void>;
+  deleteAll(): Promise<void>;
 }

@@ -1,19 +1,16 @@
-import { Schema, SchemaTypes} from "mongoose";
+import { Schema, SchemaTypes } from 'mongoose';
 
-const {String, Boolean} = SchemaTypes;
+const { String, Boolean } = SchemaTypes;
 
 const moneySchema = new Schema({
-    currency: {
-        required: true,
-        type: String,
-    },
-    value: {
-        required: true,
-        type: Number,
-    }
+  currency: {
+    required: true,
+    type: String,
+  },
+  value: {
+    required: true,
+    type: Number,
+  },
 });
 
-
-export {
-    moneySchema
-}
+export { moneySchema };

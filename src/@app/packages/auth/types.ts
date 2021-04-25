@@ -1,20 +1,20 @@
 export interface ITokenStore<V> {
-    save(key: string, value: V): Promise<void>;
+  save(key: string, value: V): Promise<void>;
 
-    exists(key: string): Promise<boolean>;
+  exists(key: string): Promise<boolean>;
 
-    find(key: string): Promise<V>;
+  find(key: string): Promise<V>;
 }
 
 export interface IJWTAuthTokens {
-    accessToken: string;
-    refreshToken: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface IJWTAuthStratergy<K, V> {
-    authenticate(uniqueID: K, authClaims: V): Promise<IJWTAuthTokens>
+  authenticate(uniqueID: K, authClaims: V): Promise<IJWTAuthTokens>;
 }
 
 export enum AuthType {
-    JWT,
+  JWT,
 }

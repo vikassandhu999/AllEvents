@@ -1,29 +1,26 @@
-import {model, Schema, SchemaTypes} from "mongoose";
+import { model, Schema, SchemaTypes } from 'mongoose';
 
-const {String, Boolean} = SchemaTypes;
+const { String, Boolean } = SchemaTypes;
 
 const customerSchema = new Schema({
-    customer_id: {
-        unique: true,
-        required: true,
-        type: String,
-    },
-    email: {
-        unique: true,
-        required: true,
-        type: String,
-    },
-    secret : {
-        required : true,
-        type : String
-    }
+  customer_id: {
+    unique: true,
+    required: true,
+    type: String,
+  },
+  email: {
+    unique: true,
+    required: true,
+    type: String,
+  },
+  secret: {
+    required: true,
+    type: String,
+  },
 });
 
-customerSchema.index("customer_id");
+customerSchema.index('customer_id');
 
-const customerAuthSecretModel = model("customer_auth_secrets", customerSchema);
+const customerAuthSecretModel = model('customer_auth_secrets', customerSchema);
 
-
-export {
-    customerAuthSecretModel
-}
+export { customerAuthSecretModel };
