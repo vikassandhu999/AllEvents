@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
-import {useLocation} from "react-router";
+import { useLocation } from 'react-router';
 
 const ScrollToTop = () => {
+  const { pathname, search } = useLocation();
 
-    const  { pathname, search } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname, search]);
 
-    useEffect(() => {
-            window.scrollTo(0, 0);
-    }, [pathname, search]);
-
-    return null;
+  return null;
 };
 
 export default ScrollToTop;

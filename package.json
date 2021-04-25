@@ -8,6 +8,8 @@
     "build": "tsc -p .",
     "start": "NODE_PATH=./bin node src/app.js",
     "generate": "kaigenerator",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
     "drop-mongodb": "ts-node src/@app/infra/db/mongoose/dropDb.ts",
     "dev": "nodemon --config nodemon.json src/app.ts",
     "dev:debug": "nodemon --config nodemon.json --inspect-brk src/app.ts",

@@ -7,20 +7,37 @@ module.exports = {
     plugins: [
         '@snowpack/plugin-react-refresh',
         '@snowpack/plugin-dotenv',
-        '@snowpack/plugin-webpack',
-        '@snowpack/plugin-typescript', // TS support
-        'snowpack-plugin-svgr' // import SVG as React component
-    ],/* for local SPA fallback routing support, more below */
-    routes: [
-        { "match": "routes", "src": ".*", "dest": "/index.html" },
+        [
+            '@snowpack/plugin-typescript',
+            {
+                /* Yarn PnP workaround: see https://www.npmjs.com/package/@snowpack/plugin-typescript */
+                ...(process.versions.pnp ? { tsc: 'yarn pnpify tsc' } : {}),
+            },
+        ],
     ],
-    devOptions: {
-        port: 3000,
+    alias: {
+        "@app": "./src/",
     },
-    testOptions: {
-        files: ['src/**/*.test.*']
-    },/* optional, if you want to use alias when importing */
-    // alias: {
-    //     "@app": "./src/",
-    // }
+    routes: [
+        /* Enable an SPA Fallback in development: */
+        {"match": "routes", "src": ".*", "dest": "/index.html"},
+    ],
+    optimize: {
+        /* Example: Bundle your final build: */
+        bundle: true,
+        splitting: true,
+        minify: true,
+        treeshake: true,
+        target: "es2017"
+    },
+    packageOptions: {
+        polyfillNode: true,
+        rollup: {plugins: [require('rollup-plugin-scss')()]}
+    },
+    devOptions: {
+        /* ... */
+    },
+    buildOptions: {
+        /* ... */
+    }
 };

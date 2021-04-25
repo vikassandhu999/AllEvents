@@ -1,5 +1,5 @@
-type UnitResponse = {   
-    status : string;
-}
+type UnitResponse = {
+  status: string;
+};
 
 export default UnitResponse;

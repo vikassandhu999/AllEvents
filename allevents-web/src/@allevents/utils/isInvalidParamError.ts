@@ -1,5 +1,5 @@
-import {BaseError} from "@allevents/core/BaseError";
+import { BaseError } from '@app/@allevents/core/BaseError';
 
-export const isInvalidParamError = (error : BaseError) => {
-    return error.httpCode===400;
-}
+export const isInvalidParamError = (error: BaseError) => {
+  return error.httpCode === 400;
+};
