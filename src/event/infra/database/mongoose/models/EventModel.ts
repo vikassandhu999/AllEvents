@@ -8,7 +8,7 @@ const { String, Date, Number } = SchemaTypes;
 //TODO: add full text search on event_name
 const eventSchema = new Schema({
   event_id: { required: true, unique: true, type: String },
-  organizer_id: { required: true, unique: true, type: String },
+  organizer_id: { required: true, type: String },
   event_name: { required: true, type: String },
   language: { required: true, type: String },
   poster: { required: true, type: String },

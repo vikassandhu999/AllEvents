@@ -7,6 +7,7 @@ import morgan from 'morgan';
 
 import { handleExpressErrors } from './utils';
 import { userRouter } from 'user/infra/http/router';
+import { venueRouter } from 'venue/infra/http/router';
 
 const app = express();
 
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV != 'production') {
 
 // app.use("/v1/forum0" , forumRouter);
 app.use('/v1', userRouter);
+app.use('/v1', venueRouter);
 
 app.use(handleExpressErrors);
 

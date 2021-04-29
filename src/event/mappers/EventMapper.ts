@@ -4,7 +4,7 @@ import { VenueMapper } from '../../venue/mapper/VenueMapper';
 
 export default class EventMapper {
   public static toDomain(model: any) {
-    const ticketPrice = MoneyMapper.toDomain(model.ticket_price);
+    const ticket_price = MoneyMapper.toDomain(model.ticket_price);
     const venue = VenueMapper.toDomain(model.venue);
 
     return new Event({
@@ -14,7 +14,7 @@ export default class EventMapper {
       language: model.language,
       poster: model.poster,
       venue: venue,
-      ticketPrice: ticketPrice,
+      ticketPrice: ticket_price,
       maxAllowedTickets: model.max_allowed_tickets,
       description: model.description,
       eventTime: model.event_time,
@@ -25,7 +25,7 @@ export default class EventMapper {
   }
 
   public static toPersistence(domainModel: Event) {
-    const ticket_price = MoneyMapper.toPersistence(domainModel.ticketPrice);
+    const ticketPrice = MoneyMapper.toPersistence(domainModel.ticketPrice);
     const venue = VenueMapper.toPersistence(domainModel.venue);
 
     return {
@@ -35,7 +35,7 @@ export default class EventMapper {
       language: domainModel.language,
       poster: domainModel.poster,
       venue: venue,
-      ticket_price: ticket_price,
+      ticket_price: ticketPrice,
       max_allowed_tickets: domainModel.maxAllowedTickets,
       description: domainModel.description,
       event_time: domainModel.eventTime,

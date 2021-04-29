@@ -3,7 +3,7 @@ import { EventModel } from 'event/infra/database/mongoose/models/EventModel';
 import IEventRepository from '../IEventRepository';
 import EventMapper from '../../mappers/EventMapper';
 
-export class MongooseUserRepository implements IEventRepository {
+export class MongooseEventRepository implements IEventRepository {
   private readonly model = EventModel;
 
   async getByEventId(eventId: string): Promise<Event | null> {

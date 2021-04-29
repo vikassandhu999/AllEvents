@@ -4,19 +4,20 @@ Content-Type: application/json
 {
   "userName" : "kai56555" ,
   "email" : "kaizejasdfkjas@gmail.com" ,
-  "fullName" : "Vikas Sandhu",
+  "firstName" : "Vikas",
+  "lastName" : "Sandhu",
   "password" : "vistagram@123"
 }
 
 ###
-GET http://localhost:5000/v1/user/email/kaizen.tech404@gmail.com/verify
+GET http://localhost:5000/v1/user/email/kaizejasdfkjas@gmail.com/verify
 
 ###
 POST http://localhost:5000/v1/user/email/verify
 Content-Type: application/json
 
 {
-  "verificationToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNTBmMWUzYy1lNDJlLTQyMmUtYjUyNC05MDZiMWM5OTI1ZTIiLCJpYXQiOjE2MTg2ODIzNTksImV4cCI6MTYxODY4MjcxOX0.Vc_VPE_ZQMJdzhzU2YBLkxNFmY0qcg5J_qNxv2_1h-s"
+  "verificationToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxY2Y3ZTMzNS03MjYwLTRiYzktOTBkOC01ZGI1NDYzMWExNGUiLCJpYXQiOjE2MTk2OTcyMjYsImV4cCI6MTYxOTY5NzU4Nn0.ljLiHq4-gxMHOIudqO4y5NCWwda6sNU7P1_upkj4qGU"
 }
 
 ###

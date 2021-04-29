@@ -16,7 +16,7 @@ export class Money {
     return this.state.currency;
   }
 
-  get value(): string {
-    return this.state.currency;
+  get value(): number {
+    return this.state.value;
   }
 }
