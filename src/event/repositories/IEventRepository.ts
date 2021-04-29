@@ -6,6 +6,6 @@ export default interface IEventRepository {
   getByEventId(eventId: string): Promise<Event | null>;
   getByUserId(userId: string): Promise<Array<Event>>;
 
-  deleteOne(userId: string): Promise<void>;
+  deleteOne(eventId: string): Promise<void>;
   deleteAll(): Promise<void>;
 }

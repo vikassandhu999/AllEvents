@@ -5,6 +5,7 @@ import {
 import { UseCase } from '@app/core/Usecase';
 import { IVenueRepository } from 'venue/repositories/IVenueRepository';
 import { Location } from '@app/domain/Location';
+import { VenueMapper } from 'venue/mapper/VenueMapper';
 
 export class GetWithinDistanceUseCase extends UseCase<
   GetWithinDistanceDTO,
@@ -41,6 +42,8 @@ export class GetWithinDistanceUseCase extends UseCase<
       maxDistance,
     );
 
-    return new GetWithinDistanceResponse(venues);
+    return new GetWithinDistanceResponse(
+      venues.map((venue) => VenueMapper.toDTO(venue)),
+    );
   }
 }

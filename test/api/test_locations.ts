@@ -710,8 +710,7 @@ const locations = [
 ];
 
 async function main() {
-  const mongooseUrl =
-    'mongodb+srv://kaizen:ZxrYuEDzmuwYBZsE@cluster0.ez7kc.mongodb.net/allevents_dev?retryWrites=true&w=majority';
+  const mongooseUrl = '';
   const connection = await mongooseConnection(mongooseUrl);
 
   // const connection = await mongooseConnection(process.env.MONGO_URL_DEV as string);

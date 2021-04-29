@@ -29,4 +29,11 @@ export class VenueMapper {
       created_at: venue.createdAt,
     };
   }
+
+  public static toDTO(venue: Venue): any {
+    return {
+      ...venue.toDTO(),
+      location: venue.location.toDTO(),
+    };
+  }
 }

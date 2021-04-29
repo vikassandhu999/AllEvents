@@ -6,7 +6,6 @@ export default class EventMapper {
   public static toDomain(model: any) {
     const ticket_price = MoneyMapper.toDomain(model.ticket_price);
     const venue = VenueMapper.toDomain(model.venue);
-
     return new Event({
       eventId: model.event_id,
       organizerId: model.organizer_id,
@@ -42,6 +41,14 @@ export default class EventMapper {
       duration: domainModel.duration,
       created_at: domainModel.createdAt,
       category: domainModel.category,
+    };
+  }
+
+  public static toDTO(domainModel: Event) {
+    return {
+      ...domainModel.toDTO(),
+      ticketPrice: domainModel.ticketPrice.toDTO(),
+      venue: VenueMapper.toDTO(domainModel.venue),
     };
   }
 }

@@ -19,4 +19,8 @@ export class Money {
   get value(): number {
     return this.state.value;
   }
+
+  toDTO(): IMoney {
+    return this.state;
+  }
 }

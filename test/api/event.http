@@ -1,0 +1,26 @@
+POST http://localhost:5000/v1/event
+Content-Type: application/json
+
+{
+  "eventName": "The Vikas Sandhu Show ft. Vikas Sandhu",
+  "poster": "https://miro.medium.com/max/1304/1*i6TZ_7vZqsVN6jRnjCw8bA.jpeg",
+  "venueId": "f0951df4-2c65-48ac-bc79-65238ae1ea21",
+  "ticketPrice": 600,
+  "ticketPriceCurrency": "USD",
+  "maxAllowedTickets": 20,
+  "description":
+    "This is very great show by a very great person so everyone has to attend this show",
+  "language": "hindi",
+  "category": "Software development",
+  "eventTime": "2021-04-29T12:11:05.815Z",
+  "duration": 3600
+}
+
+###
+GET http://localhost:5000/v1/event/cf381658-88d8-41b1-b5b9-5d8bcb47ad03
+
+###
+GET http://localhost:5000/v1/event/42220657-0243-45b0-a16e-22cd2e9cfaa5
+
+###
+POST http://localhost:5000/v1/event/42220657-0243-45b0-a16e-22cd2e9cfaa5/booking

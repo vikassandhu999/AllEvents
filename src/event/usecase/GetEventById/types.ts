@@ -1,6 +1,6 @@
 import { BaseError } from '@app/core/BaseError';
 import { HttpErrors } from '@app/infra/http/errorCode';
-import Event from 'event/domain/Event';
+import Event, { IEvent } from 'event/domain/Event';
 
 export type GetEventDTO = {
   eventId: string;
@@ -8,8 +8,8 @@ export type GetEventDTO = {
 
 export class GetEventResponse {
   status: string = 'success';
-  data: Event;
-  constructor(data: Event) {
+  data: IEvent;
+  constructor(data: IEvent) {
     this.data = data;
   }
 }

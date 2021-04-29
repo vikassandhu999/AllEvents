@@ -1,3 +1,5 @@
+import { IMoney } from '@app/domain/Money';
+
 export interface ILocation {
   lat: number;
   lng: number;
@@ -15,5 +17,9 @@ export class Location {
 
   get lng(): number {
     return this.state.lng;
+  }
+
+  toDTO(): ILocation {
+    return this.state;
   }
 }

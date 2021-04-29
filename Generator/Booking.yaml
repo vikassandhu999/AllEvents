@@ -1,0 +1,49 @@
+entities:
+  - name: Booking
+    has_mapper: true
+    fields:
+      - domain_id: "bookingId"
+        mapper_id: "booking_id"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "eventId"
+        mapper_id: "event_id"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "userId"
+        mapper_id: "user_id"
+        type: "string"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "isSuccessful"
+        mapper_id: "is_successful"
+        type: "boolean"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "isPaymentSuccessful"
+        mapper_id: "is_payment_successful"
+        type: "boolean"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "paymentDetails"
+        mapper_id: "payment_details"
+        type: "any"
+        access_modifier: "public"
+        optional: true
+      - domain_id: "bookedAt"
+        mapper_id: "booked_at"
+        type: "Date"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "lastTryAt"
+        mapper_id: "last_try_at"
+        type: "Date"
+        access_modifier: "public"
+        optional: false
+      - domain_id: "createdAt"
+        mapper_id: "created_at"
+        type: "Date"
+        access_modifier: "public"
+        optional: false

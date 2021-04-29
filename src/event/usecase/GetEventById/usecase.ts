@@ -1,12 +1,13 @@
 import { UseCase } from '@app/core/Usecase';
 import IEventRepository from 'event/repositories/IEventRepository';
 import { assert } from '@app/core/Assert';
-import Event from 'event/domain/Event';
+import Event, { IEvent } from 'event/domain/Event';
 import {
   EventDoesNotExist,
   GetEventDTO,
   GetEventResponse,
 } from 'event/usecase/GetEventById/types';
+import EventMapper from 'event/mappers/EventMapper';
 
 export default class GetEventUseCase extends UseCase<
   GetEventDTO,
@@ -35,6 +36,6 @@ export default class GetEventUseCase extends UseCase<
 
     assert(!!event, new EventDoesNotExist());
 
-    return new GetEventResponse(event);
+    return new GetEventResponse(EventMapper.toDTO(event) as IEvent);
   }
 }
