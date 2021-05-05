@@ -1,8 +1,13 @@
 import { BaseError } from './BaseError';
 import { HttpErrors } from '../infra/http/errorCode';
+import { ApiError } from '@app/core/ApiError';
 
-export class UnauthorizedAccessError extends BaseError {
+export class UnauthorizedAccessError extends ApiError {
   constructor() {
-    super('Unauthorized', HttpErrors.PERMISSION_DENIED);
+    super({
+      message: 'You are not allowed to perform this action',
+      httpCode: HttpErrors.UNAUTHENTICATED,
+      errorCode: 'unauthorized-access',
+    });
   }
 }

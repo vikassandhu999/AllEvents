@@ -11,6 +11,10 @@ export class CreateUserResponse {
   status: string = 'success';
 }
 
+const CreateUserErrors = {
+  EMAIL_ALREADY_EXIST: '/user/create-user/email-already-exist',
+};
+
 export class EmailAlreadyExistError extends BaseError {
   constructor() {
     super('Email already exists', HttpErrors.ALREADY_EXISTS, {

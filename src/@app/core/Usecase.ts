@@ -4,9 +4,11 @@ import { InvalidParamsError } from './InvalidParamsError';
 
 export abstract class UseCase<D, R> {
   private readonly inputValidation: boolean;
+  private readonly paramErrorPath: string;
 
-  protected constructor(inputValidation?: boolean) {
+  protected constructor(inputValidation?: boolean, paramErrorPath?: string) {
     this.inputValidation = inputValidation ?? true;
+    this.paramErrorPath = paramErrorPath + '/invalid-params';
   }
 
   protected abstract inputConstraints: any;
@@ -17,11 +19,14 @@ export abstract class UseCase<D, R> {
     if (this.inputValidation) {
       await this.validateInput(params);
     }
-    return await this.runImpl(params, context);
+    return this.runImpl(params, context);
   }
 
   protected async validateInput(params: D): Promise<void> {
     const validation = validate(params, this.inputConstraints);
-    assert(!validation, new InvalidParamsError(validation));
+    assert(
+      !validation,
+      new InvalidParamsError(validation, this.paramErrorPath),
+    );
   }
 }
