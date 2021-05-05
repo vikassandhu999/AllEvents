@@ -1,5 +1,6 @@
 import { HttpErrors } from '@app/infra/http/errorCode';
 import { BaseError } from '@app/core/BaseError';
+import { ApiError } from '@app/core/ApiError';
 
 export type LoginUserDTO = {
   email: string;
@@ -10,16 +11,30 @@ export class LoginUserResponse {
   constructor(public accessToken: string, public refreshToken: string) {}
 }
 
-export class EmailOrPasswordDidNotMatchError extends BaseError {
+const LoginUserErrors = {
+  EMAIL_OR_PASSWORD_MISMATCH: '/user/login-user/email-or-password-mismatch',
+  EMAIL_NOT_VERIFIED: '/user/login-user/email-not-verified',
+};
+
+export class EmailOrPasswordDidNotMatchError extends ApiError {
   constructor() {
-    super("Email or Password didn't match", HttpErrors.UNAUTHENTICATED);
+    super({
+      message: "Email or Password didn't match",
+      httpCode: HttpErrors.UNAUTHENTICATED,
+      errorCode: LoginUserErrors.EMAIL_OR_PASSWORD_MISMATCH,
+    });
   }
 }
 
-export class EmailNotVerifiedError extends BaseError {
+export class EmailNotVerifiedError extends ApiError {
   constructor() {
-    super('Email is not verified', HttpErrors.PERMISSION_DENIED, {
-      email: 'Email address is not verified',
+    super({
+      message: 'Email is not verified',
+      httpCode: HttpErrors.PERMISSION_DENIED,
+      errorCode: LoginUserErrors.EMAIL_OR_PASSWORD_MISMATCH,
+      errorInfo: {
+        email: ['Email address is not verified'],
+      },
     });
   }
 }

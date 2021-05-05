@@ -1,5 +1,6 @@
 import { HttpErrors } from '@app/infra/http/errorCode';
 import { BaseError } from '@app/core/BaseError';
+import { ApiError } from '@app/core/ApiError';
 
 export class GetUserProfileResponse {
   status: string = 'success';
@@ -9,8 +10,16 @@ export class GetUserProfileResponse {
   }
 }
 
-export class ProfileNotFoundError extends BaseError {
+const GetUserProfileErrors = {
+  PROFILE_NOT_FOUND: '/user/get-user-profile/profile-not-found',
+};
+
+export class ProfileNotFoundError extends ApiError {
   constructor() {
-    super('Profile not found', HttpErrors.NOT_FOUND);
+    super({
+      message: 'Profile not found',
+      httpCode: HttpErrors.NOT_FOUND,
+      errorCode: GetUserProfileErrors.PROFILE_NOT_FOUND,
+    });
   }
 }

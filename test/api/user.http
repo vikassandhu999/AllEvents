@@ -17,7 +17,7 @@ POST http://localhost:5000/v1/user/email/verify
 Content-Type: application/json
 
 {
-  "verificationToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxY2Y3ZTMzNS03MjYwLTRiYzktOTBkOC01ZGI1NDYzMWExNGUiLCJpYXQiOjE2MTk2OTcyMjYsImV4cCI6MTYxOTY5NzU4Nn0.ljLiHq4-gxMHOIudqO4y5NCWwda6sNU7P1_upkj4qGU"
+  "verificationToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxY2Y3ZTMzNS03MjYwLTRiYzktOTBkOC01ZGI1NDYzMWExNGUiLCJpYXQiOjE2MjAyMjc3NDgsImV4cCI6MTYyMDIyODEwOH0.X1QzfYRY1CwC5IS-9j7fvZmfab5kUQPlSDGnmF2U5C0"
 }
 
 ###
@@ -25,7 +25,7 @@ POST http://localhost:5000/v1/user/login
 Content-Type: application/json
 
 {
-  "email" : "kaizejasdfkjas@gmail.com" ,
+  "email" : "kaizejasdfkja@gmail.com" ,
   "password" : "vistagram@123"
 }
 
