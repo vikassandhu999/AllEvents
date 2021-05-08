@@ -1,5 +1,4 @@
 import { HttpErrors } from '@app/infra/http/errorCode';
-import { BaseError } from '@app/core/BaseError';
 import { ApiError } from '@app/core/ApiError';
 
 export class GetUserProfileResponse {

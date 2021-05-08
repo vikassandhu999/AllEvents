@@ -6,9 +6,9 @@ export abstract class UseCase<D, R> {
   private readonly inputValidation: boolean;
   private readonly paramErrorPath: string;
 
-  protected constructor(inputValidation?: boolean, paramErrorPath?: string) {
+  protected constructor(inputValidation?: boolean) {
     this.inputValidation = inputValidation ?? true;
-    this.paramErrorPath = paramErrorPath + '/invalid-params';
+    this.paramErrorPath = 'invalid-params';
   }
 
   protected abstract inputConstraints: any;

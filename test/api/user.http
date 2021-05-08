@@ -10,14 +10,14 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5000/v1/user/email/kaizejasdfkjas@gmail.com/verify
+GET http://localhost:5000/v1/user/email/kawai@gmail.com/verify
 
 ###
 POST http://localhost:5000/v1/user/email/verify
 Content-Type: application/json
 
 {
-  "verificationToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxY2Y3ZTMzNS03MjYwLTRiYzktOTBkOC01ZGI1NDYzMWExNGUiLCJpYXQiOjE2MjAyMjc3NDgsImV4cCI6MTYyMDIyODEwOH0.X1QzfYRY1CwC5IS-9j7fvZmfab5kUQPlSDGnmF2U5C0"
+  "verificationToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4N2M4MGFmYS02MmQ5LTRkYjctYTQ1NC1mNWIxMjYwMDI3ZTciLCJpYXQiOjE2MjAyOTc1NjUsImV4cCI6MTYyMDI5NzkyNX0.bIJdeiTKpQEDJrC3h7wJsbvTKbZfac5BOU1oPUvAUzI"
 }
 
 ###

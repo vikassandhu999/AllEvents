@@ -31,7 +31,7 @@ export class EmailNotVerifiedError extends ApiError {
     super({
       message: 'Email is not verified',
       httpCode: HttpErrors.PERMISSION_DENIED,
-      errorCode: LoginUserErrors.EMAIL_OR_PASSWORD_MISMATCH,
+      errorCode: LoginUserErrors.EMAIL_NOT_VERIFIED,
       errorInfo: {
         email: ['Email address is not verified'],
       },

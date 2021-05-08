@@ -1,128 +1,91 @@
 import React from 'react';
-import {
-  createStyles,
-  fade,
-  makeStyles,
-  Theme,
-} from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import HeaderSearchBar from '@app/x-shared/header/search-bar';
-import HeaderActionButton from '@app/x-shared/header/header-action-button';
-import { Container } from '@material-ui/core';
-import { Link, useHistory, useLocation } from 'react-router-dom';
-import AllEventsLogo from '@app/@allevents/components/text-logo';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    headerRoot: {
-      backgroundColor: '#ffffff',
-      flexGrow: 1,
-      position: 'sticky',
-      top: 0,
-      zIndex: 444,
-    },
-    appBar: {
-      backgroundColor: '#ffffff',
-    },
-    grow: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    headerActions: {},
-    search: {
-      position: 'relative',
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
-      },
-      marginRight: theme.spacing(2),
-      marginLeft: 0,
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
-      },
-    },
-    searchIcon: {
-      padding: theme.spacing(0, 2),
-      height: '100%',
-      position: 'absolute',
-      pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    inputRoot: {
-      color: 'inherit',
-    },
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: '20ch',
-      },
-    },
-    sectionDesktop: {
-      display: 'none',
-      [theme.breakpoints.up('md')]: {
-        display: 'flex',
-      },
-    },
-    sectionMobile: {
-      display: 'flex',
-      [theme.breakpoints.up('md')]: {
-        display: 'none',
-      },
-    },
-  }),
-);
+import { css } from 'glamor';
+import { PlusIcon, UserAddIcon } from '@pluralsight/ps-design-system-icon';
+import { colorsBackgroundLight } from '@pluralsight/ps-design-system-core';
+import SearchInput from '@pluralsight/ps-design-system-searchinput';
+import { GContainer } from '@app/@allevents/infra/glamor';
+import { Heading, Label } from '@pluralsight/ps-design-system-text';
+import NavUser from '@pluralsight/ps-design-system-navuser';
+import NavCookieBanner from '@pluralsight/ps-design-system-navcookiebanner';
+import Button from '@pluralsight/ps-design-system-button';
+import { useAuth } from '@app/auth/provider/auth-provider';
 
 function Header() {
-  const classes = useStyles();
-
-  const history = useHistory();
-  const { pathname } = useLocation();
+  const { isAuthenticated, user } = useAuth();
 
   return (
-    <div className={classes.headerRoot}>
-      <AppBar elevation={0} className={classes.appBar}>
-        <Container>
-          <Toolbar>
-            <Link to={'/'}>
-              <AllEventsLogo />
-            </Link>
-
-            <div className={classes.grow} />
-
-            {pathname != '/event/explore' && (
-              <div className={classes.search}>
-                <HeaderSearchBar
-                  onFocus={() => {
-                    history.push('/event/explore');
-                  }}
-                />
-              </div>
-            )}
-            <div className={classes.grow} />
-
-            <div className={classes.headerActions}>
-              <Link to={'/event/create'}>
-                <HeaderActionButton text={'Host an event'} />
-              </Link>
-              <Link to={'/auth'}>
-                <HeaderActionButton text={'Sign in'} />
-              </Link>
-            </div>
-          </Toolbar>
-        </Container>
-      </AppBar>
+    <div
+      className={`${css({
+        display: 'flex',
+        margin: 0,
+        position: 'sticky',
+        top: 0,
+        zIndex: 111,
+        padding: 0,
+        minHeight: '60px',
+        backgroundColor: colorsBackgroundLight[2],
+      })}`}
+    >
+      <NavCookieBanner message={'We use cookies'} />
+      <div
+        className={`${GContainer} ${css({
+          display: 'flex',
+          height: '100%',
+          padding: '0 0.5rem',
+          alignItems: 'center',
+          alignContent: 'center',
+          justifyContent: 'space-between',
+        })}`}
+      >
+        <Heading
+          size={Heading.sizes.small}
+          className={`${css({
+            margin: '0px',
+            padding: '0px',
+            fontWeight: '900',
+          })}`}
+        >
+          <h2>AllEvents</h2>
+        </Heading>
+        <SearchInput
+          className={`${css({ maxWidth: '600px', width: '100%' })}`}
+          css
+          size={'medium'}
+          placeholder="Searching for event"
+        />
+        {isAuthenticated ? (
+          <div
+            className={`${css({
+              display: 'flex',
+              height: '100%',
+            })}`}
+          >
+            <Button icon={<PlusIcon />} appearance={Button.appearances.stroke}>
+              Create Event
+            </Button>
+            <NavUser
+              className={`${css({
+                backgroundColor: colorsBackgroundLight[1],
+                marginLeft: '1rem',
+                cursor: 'pointer',
+              })}`}
+              name={<Label size={Label.sizes.medium}>{user.firstName}</Label>}
+              src="https://en.gravatar.com/userimage/8399312/b15448d840afacd0eb18102baf788255.jpeg"
+            />
+          </div>
+        ) : (
+          <div
+            className={`${css({
+              display: 'flex',
+              height: '100%',
+            })}`}
+          >
+            <Button icon={<UserAddIcon />} appearance={Button.appearances.flat}>
+              Signup or Login
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

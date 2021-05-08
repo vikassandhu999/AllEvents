@@ -1,40 +1,53 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import Typography from '@material-ui/core/Typography';
-import AETextField from '@app/@allevents/components/text-field';
-import SubmitButton from '@app/@allevents/components/submit-button';
-import AllEventsLogo from '@app/@allevents/components/text-logo';
-import { ArrowForward } from '@material-ui/icons';
-import useFormStyles from '@app/auth/form.style';
+import Form from '@pluralsight/ps-design-system-form'
+import Button from '@pluralsight/ps-design-system-button'
+import Banner from '@pluralsight/ps-design-system-banner'
+import { Heading, Label } from '@pluralsight/ps-design-system-text'
+import TextInput from '@pluralsight/ps-design-system-textinput'
 import authApi from '@app/auth/http/auth';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { EMAIL_STATUS } from '@app/auth/http/auth/types';
-import { isInvalidParamError } from '@app/@allevents/utils/isInvalidParamError';
+import hasResponseData from '@app/@allevents/utils/has-response-data';
+import getErrorResponseData from '@app/@allevents/utils/get-error-response-data';
 
 interface SignupLoginFormInput {
   email: string;
 }
 
-const useSignupLoginController = () => {
+const SignupLoginForm: FC = () => {
   const {
     handleSubmit,
-    control,
+    register,
     formState,
     errors,
     setError,
   } = useForm<SignupLoginFormInput>();
+  const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
   const history = useHistory();
+
+  const handleApiError = (error: any) => {
+    if (hasResponseData(error)) {
+      const { message, errorCode, errorInfo } = getErrorResponseData(error);
+      if (errorCode === 'invalid-params') {
+        setError('email', { message: errorInfo.email[0] });
+        return;
+      }
+      setErrorMessage(message);
+      return;
+    }
+    setErrorMessage('An unknown error has been occurred');
+  };
 
   const getAuthStatus = async (data: SignupLoginFormInput) => {
     const response = await authApi.getAuthStatus(data);
     if (response.isError) {
-      console.log(response.getError());
+      handleApiError(response.getError());
       return;
-      //this might internal server error or network error
-      //TODO : handle this error
     }
-    const { email, emailStatus } = response.getValue();
+    const { emailStatus } = response.getValue();
     switch (emailStatus) {
       case EMAIL_STATUS.DOES_NOT_EXIST:
         history.push('/auth/sign-up');
@@ -47,53 +60,38 @@ const useSignupLoginController = () => {
     }
   };
 
-  return {
-    onSubmit: handleSubmit(getAuthStatus),
-    errors,
-    control,
-    formState,
-  };
-};
-
-const SignupLoginForm : FC = () => {
-  const { onSubmit, errors, control, formState } = useSignupLoginController();
-
-  const classes = useFormStyles();
   return (
-    <form
-      onSubmit={onSubmit}
-      className={classes.formCard}
-      noValidate
-      autoComplete="off"
-    >
-      <AllEventsLogo />
-      <div className={classes.box0} />
-      <Typography className={classes.formTitle} variant="h6">
-        Sign up or log in
-      </Typography>
-      <div className={classes.box} />
+    <form style={{
+      "minWidth": '400px',
+      "backgroundColor": '#fff',
+      "display": 'flex',
+      "flexDirection": 'column',
+      "justifyContent": "center",
+      "justifyItems": "center",
+      "alignContent": "center",
+      "padding": "32px 48px"
+    }} onSubmit={handleSubmit(getAuthStatus)}>
+      <Form.VerticalLayout>
+        <Heading size={Heading.sizes.xSmall}>
+          <h5>Signup or Login</h5>
+        </Heading>
 
-      <AETextField
-        textFieldProps={{
-          size: 'medium',
-          label: 'Email address',
-          variant: 'outlined',
-          id:"outlined-basic"
-        }}
-        name={'email'}
-        control={control}
-      />
-      
-      {errors.email && <p>{errors.email}</p>}
-      <div className={classes.box0} />
-      <SubmitButton
-        variant={'contained'}
-        endIcon={<ArrowForward />}
-        type={'submit'}
-        disabled={formState.isSubmitting}
-      >
-        Get started
-      </SubmitButton>
+        <TextInput
+          size={TextInput.sizes.medium}
+          error={!!errors.email}
+          ref={register}
+          name="email"
+          label={<Label size={Label.sizes.medium}>Email Address</Label>}
+          placeholder="johndoe@gmail.com"
+          subLabel={errors?.email?.message}
+        />
+        <Button
+          layout={Button.layouts.fullWidth}
+          loading={formState.isSubmitting}
+          onClick={handleSubmit(getAuthStatus)}>
+          Continue
+            </Button>
+      </Form.VerticalLayout>
     </form>
   );
 };

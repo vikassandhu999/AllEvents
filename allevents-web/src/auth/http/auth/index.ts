@@ -6,10 +6,9 @@ import {
   LoginProps,
   SignupProps,
 } from '@app/auth/http/auth/types';
-import axiosErrorWrapper from '@app/@allevents/utils/axiosErrorWrapper';
 import UnitResponse from '@app/@allevents/core/UnitResponse';
 
-const baseURL = 'http://localhost:5000/v1';
+const baseURL = `http://localhost:5000/v1`;
 
 export interface IAuthApi {
   getAuthStatus(
@@ -42,7 +41,7 @@ class AuthApi implements IAuthApi {
       });
       return Result.success<AuthEmailStatusResponse>(response.data);
     } catch (e) {
-      return Result.failed<AuthEmailStatusResponse>(axiosErrorWrapper(e));
+      return Result.failed<AuthEmailStatusResponse>(e);
     }
   }
 
@@ -51,7 +50,7 @@ class AuthApi implements IAuthApi {
       const response = await this.httpClient.post('/user/login', { ...props });
       return Result.success<UnitResponse>(response.data);
     } catch (e) {
-      return Result.failed<UnitResponse>(axiosErrorWrapper(e));
+      return Result.failed<UnitResponse>(e);
     }
   }
 
@@ -60,17 +59,16 @@ class AuthApi implements IAuthApi {
       const response = await this.httpClient.post('/user', { ...props });
       return Result.success<UnitResponse>(response.data);
     } catch (e) {
-      return Result.failed<UnitResponse>(axiosErrorWrapper(e));
+      return Result.failed<UnitResponse>(e);
     }
   }
 
-  //TODO: create route on api and test
-  async verifyAuth(props: SignupProps): Promise<Result<any>> {
+  async verifyAuth(): Promise<Result<any>> {
     try {
-      const response = await this.httpClient.post('/user', { ...props });
+      const response = await this.httpClient.get('/user');
       return Result.success<any>(response.data);
     } catch (e) {
-      return Result.failed<any>(axiosErrorWrapper(e));
+      return Result.failed<any>(e);
     }
   }
 }

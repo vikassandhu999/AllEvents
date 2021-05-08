@@ -1,39 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '@app/x-shared/header';
 import { Container } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SignupLoginForm from '@app/auth/signup-login-form';
 import SignupForm from '@app/auth/signup-form';
 import LoginForm from '@app/auth/login-form';
-import { Route } from 'react-router';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-      minHeight: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      alignContent: 'center',
-    },
-    formCard: {
-      minWidth: '300px',
-      backgroundColor: '#fff',
-      display: 'flex',
-      flexDirection: 'column',
-      padding: theme.spacing(3),
-    },
-  }),
-);
+import { Route, useHistory } from 'react-router';
+import { useAuth } from '@app/auth/provider/auth-provider';
 
 const AuthPage = () => {
-  const classes = useStyles();
+  const { isAuthenticated, isVerifyingAuth } = useAuth();
+
+  const history = useHistory();
+  useEffect(() => {
+    if (isAuthenticated && !isVerifyingAuth) {
+      history.push('/');
+    }
+  }, [isAuthenticated, isVerifyingAuth]);
+
   return (
     <>
       <Header />
       <Container>
-        <div className={classes.root}>
+        <div
+          style={{
+            width: '100%',
+            minHeight: '100vh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignContent: 'center',
+          }}
+        >
           <Route exact path={'/auth'} component={SignupLoginForm} />
           <Route exact path={'/auth/sign-up'} component={SignupForm} />
           <Route exact path={'/auth/login'} component={LoginForm} />

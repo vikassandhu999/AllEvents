@@ -8,7 +8,6 @@ const LandingPage = () => {
   return (
     <div className="homepage">
       <Header />
-      <Hero />
       <RecentEvents />
       <Footer />
     </div>

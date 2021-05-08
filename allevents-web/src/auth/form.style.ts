@@ -9,6 +9,7 @@ const useFormStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
       alignItems: 'center',
       alignContent: 'center',
+      backgroundColor:"#000"
     },
     box0: {
       display: 'block',

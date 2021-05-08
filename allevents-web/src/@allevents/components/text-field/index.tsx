@@ -50,8 +50,6 @@ const AETextField: FC<Props> = ({ textFieldProps, control, name }) => {
     defaultValue: '',
   });
 
-
-
   return <StyledTextField 
   {...textFieldProps} 
   {...inputProps} 

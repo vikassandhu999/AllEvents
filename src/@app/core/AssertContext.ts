@@ -1,4 +1,5 @@
 import { UnauthorizedAccessError } from './UnathorizedAccessError';
+import { NotEnoughInformationProvidedError } from '@app/core/NotEnoughInformationProvidedError';
 
 export interface AssertContextProps {
   isAuthenticated?: boolean;
@@ -10,7 +11,7 @@ export function AssertContext(context: any, assertion: AssertContextProps) {
     !!assertion.isAuthenticated &&
     assertion.isAuthenticated != context.isAuthenticated
   ) {
-    throw new UnauthorizedAccessError();
+    throw new NotEnoughInformationProvidedError();
   }
 
   if (!!assertion.authLevel && assertion.authLevel != context.authLevel) {
