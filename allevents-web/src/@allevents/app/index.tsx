@@ -10,6 +10,9 @@ import Theme from '@pluralsight/ps-design-system-theme';
 import AuthProvider from '@app/auth/provider/auth-provider';
 import LandingPage from '@app/landing-page';
 import CreateEvent from '@app/event/create-event';
+import ProfilePage from '@app/profile';
+import VenueSearch from '@app/venue/venue-search';
+import VenueSelect from '@app/venue/venue-select';
 
 const AllEvents = () => {
   return (
@@ -26,6 +29,8 @@ const AllEvents = () => {
               component={ExploreEventsPage}
             />
             <Route exact path={'/event/create'} component={CreateEvent} />
+            <Route exact path={'/me'} component={ProfilePage} />
+            <Route exact path={'/search-venue'} component={VenueSelect} />
             <Route exact path={'/'} component={LandingPage} />
           </Switch>
         </AuthProvider>

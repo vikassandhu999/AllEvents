@@ -2,15 +2,14 @@ import React, { FC, useEffect, useState } from 'react';
 import Form from '@pluralsight/ps-design-system-form';
 import Button from '@pluralsight/ps-design-system-button';
 import TextInput from '@pluralsight/ps-design-system-textinput';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import authApi from '@app/auth/http/auth';
-import { Heading, Label, textColors } from '@pluralsight/ps-design-system-text';
+import { Heading, Label } from '@pluralsight/ps-design-system-text';
 import hasResponseData from '@app/@allevents/utils/has-response-data';
 import getErrorResponseData from '@app/@allevents/utils/get-error-response-data';
 import { mapKeyValue } from '@app/@allevents/utils/mapKeyValue';
 import Banner from '@pluralsight/ps-design-system-banner';
 import TextArea from '@pluralsight/ps-design-system-textarea';
-import Steps from '@pluralsight/ps-design-system-steps';
 import { colors } from '@pluralsight/ps-design-system-text/dist/esm/react/heading';
 import { useAuth } from '@app/auth/provider/auth-provider';
 import { css } from 'glamor';
@@ -20,11 +19,26 @@ import {
   colorsGradient,
   colorsTextIcon,
 } from '@pluralsight/ps-design-system-core';
+import TagSelect from '@app/event/components/tag-select';
+import ImageUpload from '@app/@allevents/components/image-upload';
 
 const LoginUserErrors = {
   EMAIL_OR_PASSWORD_MISMATCH: '/user/login-user/email-or-password-mismatch',
   EMAIL_NOT_VERIFIED: '/user/login-user/email-not-verified',
 };
+
+type keyType =
+  | 'eventName'
+  | 'poster'
+  | 'venueId'
+  | 'ticketPrice'
+  | 'ticketPriceCurrency'
+  | 'maxAllowedTickets'
+  | 'description'
+  | 'language'
+  | 'category'
+  | 'eventTime'
+  | 'duration';
 
 interface CreateEventInput {
   eventName: string;
@@ -44,6 +58,7 @@ const CreateEvent: FC = () => {
   const {
     handleSubmit,
     register,
+    control,
     formState,
     errors,
     setError,
@@ -56,31 +71,27 @@ const CreateEvent: FC = () => {
   const handleApiError = (error: any) => {
     if (hasResponseData(error)) {
       const { message, errorCode, errorInfo } = getErrorResponseData(error);
-      // if (errorCode === 'invalid-params') {
-      //   mapKeyValue(errorInfo, (key: 'email' | 'password', value: string[]) => {
-      //     return setError(key, { message: value[0] });
-      //   });
-      // } else if (errorCode === LoginUserErrors.EMAIL_NOT_VERIFIED) {
-      //   if (errorInfo.email) setError('email', { message: errorInfo.email[0] });
-      //   return;
-      // } else if (errorCode === LoginUserErrors.EMAIL_OR_PASSWORD_MISMATCH) {
-      //   setErrorMessage(message);
-      //   return;
-      // }
+      if (errorCode === 'invalid-params') {
+        mapKeyValue(errorInfo, (key: keyType, value: string[]) => {
+          return setError(key, { message: value[0] });
+        });
+      }
+      setErrorMessage('An unknown error has been occurred');
     } else {
       setErrorMessage('An unknown error has been occurred');
     }
   };
 
-  const login = async (data: CreateEventInput) => {
+  const createEvent = async (data: CreateEventInput) => {
     setErrorMessage(null);
     clearErrors();
-    const response = await authApi.login(data);
-    if (response.isError) {
-      handleApiError(response.getError());
-      return;
-    }
-    await verifyAuth();
+    console.log({ postData: data });
+    // const response = await authApi.createEvent(data);
+    // if (response.isError) {
+    //   handleApiError(response.getError());
+    //   return;
+    // }
+    // await verifyAuth();
   };
 
   const renderForm = () => {
@@ -96,7 +107,7 @@ const CreateEvent: FC = () => {
           alignContent: 'center',
           padding: '32px 48px',
         }}
-        onSubmit={handleSubmit(login)}
+        onSubmit={handleSubmit(createEvent)}
       >
         <Form.VerticalLayout>
           {errorMessage && (
@@ -117,15 +128,18 @@ const CreateEvent: FC = () => {
             subLabel={errors?.eventName?.message}
           />
 
-          <TextInput
-            size={TextInput.sizes.medium}
-            error={!!errors.poster}
-            ref={register}
+          <Controller
             name="poster"
-            label={<Label size={Label.sizes.medium}>Event poster</Label>}
-            placeholder="Cool Image"
-            subLabel={errors?.poster?.message}
+            control={control}
+            render={(field) => (
+              <ImageUpload
+                label={'Upload poster'}
+                onImageChange={field.onChange}
+              />
+            )}
           />
+
+          <TagSelect />
 
           <TextArea
             error={!!errors.description}
@@ -196,7 +210,7 @@ const CreateEvent: FC = () => {
             <Button
               layout={Button.layouts.fullWidth}
               loading={formState.isSubmitting}
-              onClick={handleSubmit(login)}
+              onClick={handleSubmit(createEvent)}
             >
               Publish
             </Button>
@@ -204,7 +218,7 @@ const CreateEvent: FC = () => {
               appearance={Button.appearances.stroke}
               layout={Button.layouts.fullWidth}
               loading={formState.isSubmitting}
-              onClick={handleSubmit(login)}
+              onClick={handleSubmit(createEvent)}
             >
               Draft
             </Button>

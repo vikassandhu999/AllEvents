@@ -9,12 +9,17 @@ import { handleExpressErrors } from './utils';
 import { userRouter } from 'user/infra/http/router';
 import { venueRouter } from 'venue/infra/http/router';
 import { eventRouter } from 'event/infra/http/router';
+import { storageRouter } from 'storage/infra/http/router';
 
 const app = express();
 
 app.use(
   cors({
-    origin: [`http://localhost:5002`, `https://localhost:5000`],
+    origin: [
+      `http://localhost:5002`,
+      `https://localhost:5000`,
+      `http://192.168.43.159:5002`,
+    ],
     credentials: true,
   }),
 );
@@ -31,6 +36,7 @@ if (process.env.NODE_ENV != 'production') {
 app.use('/v1', userRouter);
 app.use('/v1', venueRouter);
 app.use('/v1', eventRouter);
+app.use('/v1', storageRouter);
 
 app.use(handleExpressErrors);
 

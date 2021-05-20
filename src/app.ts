@@ -1,6 +1,6 @@
-import { app } from '@app/infra/http';
-
 require('dotenv').config();
+
+import { app } from '@app/infra/http';
 
 import { mongooseConnection } from '@app/infra/db/mongoose/connection';
 

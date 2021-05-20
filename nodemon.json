@@ -1,6 +1,6 @@
 {
   "restartable": "rs",
-  "ignore": [".git", "node_modules/**/node_modules"],
+  "ignore": [".git", "node_modules/**/node_modules","allevents-web"],
   "verbose": true,
   "exec": "NODE_PATH=./src ts-node --files",
   "watch": ["src/"],

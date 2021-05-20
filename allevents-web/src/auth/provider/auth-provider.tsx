@@ -46,8 +46,6 @@ export default function AuthProvider({
 }: AuthProviderProps): JSX.Element {
   const [state, setState] = React.useState<AuthState>(initialAuthState);
 
-  const { isAuthenticated, isVerifyingAuth, error, user } = state;
-
   async function handleApiError(error: any) {
     if (hasResponseData(error)) {
       const { message, errorCode } = getErrorResponseData(error);

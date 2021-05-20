@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { css } from 'glamor';
 import { PlusIcon, UserAddIcon } from '@pluralsight/ps-design-system-icon';
 import { colorsBackgroundLight } from '@pluralsight/ps-design-system-core';
@@ -9,9 +9,15 @@ import NavUser from '@pluralsight/ps-design-system-navuser';
 import NavCookieBanner from '@pluralsight/ps-design-system-navcookiebanner';
 import Button from '@pluralsight/ps-design-system-button';
 import { useAuth } from '@app/auth/provider/auth-provider';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 function Header() {
   const { isAuthenticated, user } = useAuth();
+  const { pathname } = useLocation();
+
+  const showSearchInput = useMemo(() => pathname !== '/event/explore', [
+    pathname,
+  ]);
 
   return (
     <div
@@ -26,7 +32,7 @@ function Header() {
         backgroundColor: colorsBackgroundLight[2],
       })}`}
     >
-      <NavCookieBanner message={'We use cookies'} />
+      {/*<NavCookieBanner message={'We use cookies'} />*/}
       <div
         className={`${GContainer} ${css({
           display: 'flex',
@@ -37,22 +43,29 @@ function Header() {
           justifyContent: 'space-between',
         })}`}
       >
-        <Heading
-          size={Heading.sizes.small}
-          className={`${css({
-            margin: '0px',
-            padding: '0px',
-            fontWeight: '900',
-          })}`}
-        >
-          <h2>AllEvents</h2>
-        </Heading>
-        <SearchInput
-          className={`${css({ maxWidth: '600px', width: '100%' })}`}
-          css
-          size={'medium'}
-          placeholder="Searching for event"
-        />
+        <Link to={'/'}>
+          <Heading
+            size={Heading.sizes.small}
+            className={`${css({
+              margin: '0px',
+              padding: '0px',
+              fontWeight: '900',
+            })}`}
+          >
+            <h2>AllEvents</h2>
+          </Heading>
+        </Link>
+        {showSearchInput && (
+          <Link to={'/event/explore'}>
+            <SearchInput
+              className={`${css({ maxWidth: '600px', width: '100%' })}`}
+              css
+              size={'medium'}
+              placeholder="Searching for event"
+            />
+          </Link>
+        )}
+
         {isAuthenticated ? (
           <div
             className={`${css({
@@ -60,18 +73,27 @@ function Header() {
               height: '100%',
             })}`}
           >
-            <Button icon={<PlusIcon />} appearance={Button.appearances.stroke}>
-              Create Event
-            </Button>
-            <NavUser
-              className={`${css({
-                backgroundColor: colorsBackgroundLight[1],
-                marginLeft: '1rem',
-                cursor: 'pointer',
-              })}`}
-              name={<Label size={Label.sizes.medium}>{user.firstName}</Label>}
-              src="https://en.gravatar.com/userimage/8399312/b15448d840afacd0eb18102baf788255.jpeg"
-            />
+            <Link to={'/event/create'}>
+              <Button
+                icon={<PlusIcon />}
+                appearance={Button.appearances.stroke}
+              >
+                Create Event
+              </Button>
+            </Link>
+            <Link to={'/me'}>
+              <NavUser
+                className={`${css({
+                  backgroundColor: colorsBackgroundLight[1],
+                  marginLeft: '1rem',
+                  cursor: 'pointer',
+                })}`}
+                name={() => (
+                  <Label size={Label.sizes.medium}>{user.firstName}</Label>
+                )}
+                src="https://en.gravatar.com/userimage/8399312/b15448d840afacd0eb18102baf788255.jpeg"
+              />
+            </Link>
           </div>
         ) : (
           <div
@@ -80,9 +102,14 @@ function Header() {
               height: '100%',
             })}`}
           >
-            <Button icon={<UserAddIcon />} appearance={Button.appearances.flat}>
-              Signup or Login
-            </Button>
+            <Link to={'/auth'}>
+              <Button
+                icon={<UserAddIcon />}
+                appearance={Button.appearances.flat}
+              >
+                Signup or Login
+              </Button>
+            </Link>
           </div>
         )}
       </div>

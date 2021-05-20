@@ -33,7 +33,6 @@ const venueSchema = new Schema({
 });
 
 venueSchema.index('venue_id');
-venueSchema.index('venue_name');
 venueSchema.index({ location: '2dsphere' });
 
 const VenueModel = model('venue', venueSchema);

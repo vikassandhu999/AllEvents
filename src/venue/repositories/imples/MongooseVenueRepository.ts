@@ -7,6 +7,13 @@ import { Location } from '@app/domain/Location';
 export class MongooseVenueRepository implements IVenueRepository {
   private readonly model = VenueModel;
 
+  async search(query: string): Promise<Venue[]> {
+    const aggregatedQuery = MongooseVenueRepository.createFTSQuery(query);
+    const result = await VenueModel.aggregate(aggregatedQuery).exec();
+    if (!result) return [];
+    return result.map((venueDoc: any) => VenueMapper.toDomain(venueDoc));
+  }
+
   async getById(venueId: string): Promise<Venue | null> {
     const venueDoc = await this.model.findOne({ venue_id: venueId }).exec();
     if (!venueDoc) return null;
@@ -34,6 +41,32 @@ export class MongooseVenueRepository implements IVenueRepository {
 
   async deleteAll(): Promise<void> {
     return this.model.deleteMany();
+  }
+
+  private static createFTSQuery(query: string): any {
+    return [
+      {
+        $search: {
+          index: 'venue_fts_index',
+          autocomplete: {
+            query: query,
+            path: 'venue_name',
+            fuzzy: {
+              maxEdits: 2,
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          venue_id: 1,
+          venue_name: 1,
+          location: 1,
+          media: 1,
+          created_at: 1,
+        },
+      },
+    ];
   }
 
   private static createLocationQuery(

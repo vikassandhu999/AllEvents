@@ -49,6 +49,7 @@ const LoginForm: FC = () => {
         setErrorMessage(message);
         return;
       }
+      setErrorMessage('An unknown error has been occurred');
     } else {
       setErrorMessage('An unknown error has been occurred');
     }

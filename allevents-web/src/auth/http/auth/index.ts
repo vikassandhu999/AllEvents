@@ -8,7 +8,7 @@ import {
 } from '@app/auth/http/auth/types';
 import UnitResponse from '@app/@allevents/core/UnitResponse';
 
-const baseURL = `http://localhost:5000/v1`;
+const baseURL = `http://192.168.43.159:5000/v1`;
 
 export interface IAuthApi {
   getAuthStatus(
